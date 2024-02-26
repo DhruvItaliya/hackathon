@@ -1,16 +1,24 @@
-import { catchAsyncError } from "../middleware/catchAsyncError.js";
-import ErrorHandler from "../middleware/error.js";
+import { catchAsyncError } from "../middlewares/catchAsyncError.js";
+import ErrorHandler from "../middlewares/error.js";
 import { User } from "../models/userSchema.js";
 import { sendToken } from "../utils/jwtToken.js";
+import { validationResult } from 'express-validator';
+
 
 export const userRegister  = catchAsyncError(async(req, res, next)=>{
+    // getting error through validationResult from req object
+    const error = validationResult(req);
+    const errorMsg = error.array().map(error => error.msg).join('\n');
+    if (!error.isEmpty()) {
+        return next(new ErrorHandler( errorMsg ,400));
+    }
     const { role, name, mobile, email, age, city, password }= req.body;
     if( !role || !name || !mobile|| !email || !password || !city){
         return next(new ErrorHandler("Please fill full registration form"));
     }
     const isEmail = await User.findOne({email});
     if(isEmail) {
-        return next(new ErrorHandler("Email.already Exists"));
+        return next(new ErrorHandler("Email already Exists"));
     }
     const user = await User.create({
         role, name, mobile, email, age, city, password
@@ -24,6 +32,12 @@ export const userRegister  = catchAsyncError(async(req, res, next)=>{
 });
 
 export const userLogin = catchAsyncError(async(req, res, next)=>{
+    // getting error through validationResult from req object
+    const error = validationResult(req);
+    const errorMsg = error.array().map(error => error.msg).join('\n');
+    if (!error.isEmpty()) {
+        return next(new ErrorHandler( errorMsg ,400));
+    }
     const { role, email, password} = req.body;
     if(!role || !email || !password){
         return next(new ErrorHandler("Please Provide Role, Email and Password",400));
