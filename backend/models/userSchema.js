@@ -40,7 +40,6 @@ const userSchema = new mongoose.Schema({
             },
             message: '{VALUE} is not a valid age'
         },
-        default: null,
     },
     city: {
         type: String,
