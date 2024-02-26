@@ -4,6 +4,11 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema({
+    role: {
+        type: String,
+        enum: ["hotel", "volunteer"],
+        required: [true, "Please Select one Role"]
+    },
     name: {
         type: String,
         required : [true, "Please Provide Your Name"],
@@ -12,6 +17,7 @@ const userSchema = new mongoose.Schema({
     },
     mobile: {
         type: String,
+        unique: true,
         required: [true, "Please Provide Mobile no."],
         validate: {
             validator: function(v) {
@@ -22,6 +28,7 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
+        unique: true,
         required : [true, "Please Provide Your Email"],
         validate: [validator.isEmail, "Please Provide a Valid Email"]
     },
@@ -50,11 +57,15 @@ const userSchema = new mongoose.Schema({
     badge: {
         type: String,
         enum: ['Diamond','Platinum','Gold', 'Silver', 'Bronze', "Spark"],
-        default: 'Spark'
+        default: function() {
+            return this.role === 'volunteer' ? "Spark" : null;
+        }
     },
     point: {
         type: Number,
-        default: 5       
+        default: function() {
+            return this.role === 'volunteer' ? 0 : 5;
+        }
     }
 },{ timestamps: true });
 
