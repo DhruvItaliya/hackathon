@@ -3,7 +3,7 @@ import React from 'react'
 const Navbar = () => {
   return (
     <div>
-      <header style={{zIndex:5}} className="bg-white fixed p-1 w-full top-0 h-16">
+      <header style={{zIndex:5}} className="bg-white drop-shadow-xl fixed p-1 w-full top-0 h-16">
   <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
     <div className="flex h-16 items-center justify-between">
       <div className="md:flex md:items-center md:gap-12">
