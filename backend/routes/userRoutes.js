@@ -4,7 +4,7 @@ import { userLogin, userRegister, userLogout, getUser } from '../controllers/use
 import { isAuthenticated } from '../../middlewares/auth.js';
 
 //Destructuring body and validationResult
-const { body } = require('express-validator');
+import { body } from 'express-validator';
 
 router.post('/register', [
     //Validation using express-validator
@@ -25,4 +25,4 @@ router.get('/getuser', isAuthenticated, getUser);
 router.get('/logout', isAuthenticated, userLogout);
 
 // It is necessary to export module
-module.exports = router;
+export default router;
