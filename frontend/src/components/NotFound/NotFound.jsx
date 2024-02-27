@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const PageNotFound = () => {
   return (
@@ -11,12 +12,12 @@ const PageNotFound = () => {
 
     <p class="mt-4 text-gray-500">We can't find that page.</p>
 
-    <a
-      href="#"
+    <Link
+      to="/Home"
       class="mt-6 inline-block rounded bg-purple-500 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring"
     >
       Go Back Home
-    </a>
+    </Link>
   </div>
 </div>
     </div>
