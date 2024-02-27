@@ -2,15 +2,11 @@ import mongoose from 'mongoose';
 
 const driveSchema = new mongoose.Schema({
     food_name:{
-        type:String,
+        type:[String],
         require:true
     },
     no_of_meals:{
         type:Number,
-        require:true
-    },
-    location:{
-        type:String,
         require:true
     },
     posted_by:{
@@ -20,12 +16,21 @@ const driveSchema = new mongoose.Schema({
     },
     consent:{
         type:Boolean,
-        require:true,
-        default:false
+        require:[true,"Please check consent"],
+        enum:[true]
     },
     image:{
         type:String,
-        require:true
+        require:[true,"Please provide an image"]
+    },
+    contributed_by:{
+        type:[mongoose.Schema.Types.ObjectId],
+        ref: 'User', // Reference to the User model
+        default:[]
+    },
+    active:{
+        type:Boolean,
+        default:true
     }
 },{timestamps:true}); 
 

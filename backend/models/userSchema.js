@@ -55,7 +55,7 @@ const userSchema = new mongoose.Schema({
     },
     badge: {
         type: String,
-        enum: ['Diamond','Platinum','Gold', 'Silver', 'Bronze', "Spark"],
+        enum: ['Diamond','Platinum','Gold', 'Silver', 'Bronze', "Spark",null],
         default: function() {
             return this.role === 'volunteer' ? "Spark" : null;
         }
@@ -65,6 +65,10 @@ const userSchema = new mongoose.Schema({
         default: function() {
             return this.role === 'volunteer' ? 0 : 5;
         }
+    },
+    ndrive:{
+        type: Number,
+        default: 0
     }
 },{ timestamps: true });
 
