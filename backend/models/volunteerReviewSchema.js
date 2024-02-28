@@ -13,7 +13,6 @@ const volunteerReviewSchema = new mongoose.Schema({
         type:String,
         require:[true,"Your Description will be very helpfu to join other joinees"],
         minLength: [20, "Description must be of 20 characters"],
-        enum:[true]
     },
     improvements:{
         type: String,
@@ -24,4 +23,4 @@ const volunteerReviewSchema = new mongoose.Schema({
     }
 },{timestamps:true}); 
 
-export const VolunteerReview = new mongoose.model('volunteerReview',driveSchema);
+export const VolunteerReview = new mongoose.model('volunteerReview',volunteerReviewSchema);

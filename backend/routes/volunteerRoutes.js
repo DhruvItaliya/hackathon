@@ -6,9 +6,7 @@ import { isAuthenticated } from '../middlewares/auth.js';
 //Destructuring body and validationResult
 import { body } from 'express-validator';
 
-router.post('/review_post', [
-    //Validation using express-validator
-], reviewPost);
+router.post('/review_post', isAuthenticated, reviewPost);
 
 router.get('/join_drive/:id', isAuthenticated, joinDrive);
 
