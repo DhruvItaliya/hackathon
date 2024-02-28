@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 import dbConnection from "./database/dbConnection.js";
 import { errorMiddleware } from "./middlewares/error.js";
 import userRoutes from "./routes/userRoutes.js"
+import hotelsRoutes from "./routes/hotelsRoutes.js"
+import volunteerRoutes from "./routes/volunteerRoutes.js"
 
 const app = express();
 dotenv.config();
@@ -20,6 +22,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.use('/user', userRoutes);
+app.use('/hotels', hotelsRoutes);
+app.use('/volunteer', volunteerRoutes);
 
 dbConnection();
 

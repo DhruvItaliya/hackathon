@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
+import Home from './components/Home/Home';
 import Error from './components/NotFound/error';
 import Popup from './components/Layout/popup';
 import Loading from './components/Layout/loading';
@@ -10,18 +11,18 @@ import { Routes, Route, Link} from 'react-router-dom';
 import Signup from './components/signup';
 import LeaderBoard from './components/leaderboard';
 import PageNotFound from './components/NotFound/NotFound';
+
 import SidebarVol from './components/Layout/sideVolunteer';
 import SideHotel from './components/Layout/sideHotel';
 import SideAdmin from './components/Layout/sideAdmin';
 import UserProfile from './components/userprofile';
  let userTypeFromSession;
  function App() {
- 
   return (
     <div className='bg-gray-50  flex flex-col'>
       
       <div>
-      <Navbar />
+        <Navbar />
       </div>
 
       <div className='flex-grow flex-row mt-16 min-h-screen  max-h-full'>
@@ -34,7 +35,7 @@ import UserProfile from './components/userprofile';
           </div>
           <div className='w-full' >
             <UserProfile/>
-        {/* <Routes >
+        <Routes >
 
         <Route path="/LeaderBoard" element={<LeaderBoard/>}></Route>
         <Route path="/ContactUs" element={<ContactUs/>}></Route>
@@ -42,14 +43,14 @@ import UserProfile from './components/userprofile';
         <Route path='/SignUp' element={<Signup/>}></Route>
         <Route path="*" element={<PageNotFound/>}></Route>
 
-        </Routes> */}
+        </Routes>
         
         </div>
         </div>
 
       </div>
       <div>
-      <Footer />
+        <Footer />
       </div>
     </div>
     

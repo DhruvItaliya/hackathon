@@ -1,32 +1,41 @@
 import mongoose from 'mongoose';
 
 const driveSchema = new mongoose.Schema({
-    food_name:{
-        type:String,
-        require:true
+    food_name: {
+        type: [String],
+        required: true
     },
-    no_of_meals:{
-        type:Number,
-        require:true
+    no_of_meals: {
+        type: Number,
+        required: true
     },
-    location:{
-        type:String,
-        require:true
+    posted_by: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
-    posted_by:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'User',
-        require:true
+    consent: {
+        type: Boolean,
+        required: [true, "Please check consent"],
+        enum: [true]
     },
-    consent:{
-        type:Boolean,
-        require:true,
-        default:false
+    image: {
+        type: String,
+        required: [true, "Please provide an image"]
     },
-    image:{
-        type:String,
-        require:true
+    contributed_by: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'User', // Reference to the User model
+        default: []
+    },
+    review_post_by: {
+        type: [Boolean],
+        default: [],
+    },
+    active: {
+        type: Boolean,
+        default: true
     }
-},{timestamps:true}); 
+}, { timestamps: true });
 
-export const Drives = new mongoose.model('Drives',driveSchema);
+export const Drives = new mongoose.model('Drives', driveSchema);
