@@ -5,22 +5,22 @@ import { Drives } from "../models/driveSchema.js";
 import { sendToken } from "../utils/jwtToken.js";
 import { validationResult } from 'express-validator';
 
-export const reviewPost  = catchAsyncError(async(req, res, next)=>{
+export const reviewPost = catchAsyncError(async (req, res, next) => {
     // getting error through validationResult from req object
     const error = validationResult(req);
     const errorMsg = error.array().map(error => error.msg).join('\n');
     if (!error.isEmpty()) {
-        return next(new ErrorHandler( errorMsg ,400));
+        return next(new ErrorHandler(errorMsg, 400));
     }
-    const {_id,role} = req.user;
-    
+    const { _id, role } = req.user;
+
     if (role !== 'volunteer') {
         return next(
-          new ErrorHandler(`You can't post review, you are hotel`, 400)
+            new ErrorHandler(`You can't post review, you are hotel`, 400)
         );
     }
-    const { description, improvements, image }= req.body;
-    if( !description || !improvements || !image){
+    const { description, improvements, image } = req.body;
+    if (!description || !improvements || !image) {
         return next(new ErrorHandler("Please fill all required fields!"));
     }
     const posted_by = _id;
@@ -34,7 +34,14 @@ export const reviewPost  = catchAsyncError(async(req, res, next)=>{
     });
 });
 
-export const joinDrive = catchAsyncError(async(req, res, next) => {
+export const joinDrive = catchAsyncError(async (req, res, next) => {
+    const { role } = req.user;
+
+    if (role !== 'volunteer') {
+        return next(
+            new ErrorHandler(`You can't access, you are hotel`, 400)
+        );
+    }
     const userId = req.user._id;
     const { id } = req.params;
     console.log(id);
@@ -54,5 +61,53 @@ export const joinDrive = catchAsyncError(async(req, res, next) => {
     res.status(200).json({
         success: true,
         message: "You have successfully joined this drive!",
+    });
+});
+
+export const myDrives_active = catchAsyncError(async (req, res, next) => {
+    const { role } = req.user;
+
+    if (role !== 'volunteer') {
+        return next(
+            new ErrorHandler(`You can't access, you are hotel`, 400)
+        );
+    }
+    const volunteerCity = req.user.city;
+    const drives = await Drives.find({ active: true });
+    const filteredDrives = await Promise.all(drives.map(async (drive) => {
+        const hotel = await User.findById(drive.posted_by);
+        if (hotel.city === volunteerCity) return drive;
+        return null;
+    }));
+
+    const finalDrives = filteredDrives.filter(drive => drive !== null);
+    
+    res.status(200).json({
+        success: true,
+        finalDrives,
+    });
+});
+
+export const myDrives_inactive = catchAsyncError(async (req, res, next) => {
+    const { role } = req.user;
+
+    if (role !== 'volunteer') {
+        return next(
+            new ErrorHandler(`You can't access, you are hotel`, 400)
+        );
+    }
+    const volunteerCity = req.user.city;
+    const drives = await Drives.find({ active: false });
+    const filteredDrives = await Promise.all(drives.map(async (drive) => {
+        const hotel = await User.findById(drive.posted_by);
+        if (hotel.city === volunteerCity) return drive;
+        return null;
+    }));
+
+    const finalDrives = filteredDrives.filter(drive => drive !== null);
+    
+    res.status(200).json({
+        success: true,
+        finalDrives,
     });
 });
