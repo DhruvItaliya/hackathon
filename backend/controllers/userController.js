@@ -52,7 +52,7 @@ export const userLogin = catchAsyncError(async(req, res, next)=>{
     }
     if (user.role !== role) {
         return next(
-          new ErrorHandler(`User with provided email and ${role} not found!`, 404)
+          new ErrorHandler(`User with provided email and role not found!`, 404)
         );
     }
     sendToken(user, 200, res,"Logged In Successfully")
