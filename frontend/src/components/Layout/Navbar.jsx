@@ -2,13 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Navbar = () => {
+  // const myPath=window.location.pathname;
   return (
     <div>
       <header style={{zIndex:5}} className="bg-white drop-shadow-xl fixed p-1 w-full top-0 h-16">
   <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
     <div className="flex h-16 items-center justify-between">
       <div className="md:flex md:items-center md:gap-12">
-        <a className="block text-purple-500" href="#">
+        <Link className="block text-purple-500" to="/">
           <span className="sr-only">Home</span>
           <svg width="58" height="58" viewBox="0 0 319 318" fill="none" xmlns="http://www.w3.org/2000/svg">
 <ellipse cx="154.954" cy="187.649" rx="80.5" ry="90.5" transform="rotate(-16.8089 154.954 187.649)" fill="#B764DD"/>
@@ -24,35 +25,32 @@ const Navbar = () => {
 </svg>
 
 
-        </a>
+        </Link>
       </div>
 
       <div className="hidden md:block">
         <nav aria-label="Global">
           <ul className="flex items-center gap-6 text-sm">
+              <li>
+              <Link to="/home" className="text-gray-800 font-bold text-lg  transition hover:text-purple-500/75 " > Home </Link>
+            </li>
             <li>
-              <Link to="/home" className="text-gray-800 font-bold text-lg  transition hover:text-purple-500/75 " href="#"> Home </Link>
+              <Link to="/Feed" className="text-gray-800 font-bold text-lg transition hover:text-purple-500/75 " > Feed </Link>
             </li>
 
             <li>
-              <Link to="/Feed" className="text-gray-800 font-bold text-lg transition hover:text-purple-500/75 " href="#"> Feed </Link>
+              <Link to="/LeaderBoard" className="text-gray-800 font-bold text-lg transition hover:text-purple-500/75 " > Leader Board </Link>
             </li>
 
             <li>
-              <Link to="/LeaderBoard" className="text-gray-800 font-bold text-lg transition hover:text-purple-500/75 " href="#"> Leader Board </Link>
+              <Link to="/AboutUs" className="text-gray-800 font-bold text-lg  transition hover:text-purple-500/75 " > About us </Link>
             </li>
 
             <li>
-              <Link to="/AboutUs" className="text-gray-800 font-bold text-lg  transition hover:text-purple-500/75 " href="#"> About us </Link>
+              <Link to="/ContactUs" className="text-gray-800 font-bold text-lg transition hover:text-purple-500/75 " > Contact us </Link>
             </li>
 
-            <li>
-              <Link to="/ContactUs" className="text-gray-800 font-bold text-lg transition hover:text-purple-500/75 " href="#"> Contact us </Link>
-            </li>
-
-            {/* <li>
-              <Link to="/" className="text-gray-800 font-bold text-lg transition hover:text-gray-800/50" href="#"> Blog </a>
-            </li> */}
+            
           </ul>
         </nav>
       </div>
