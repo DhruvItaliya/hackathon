@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
+import Home from './components/Home/Home';
 import Error from './components/NotFound/error';
 import Popup from './components/Layout/popup';
 import Loading from './components/Layout/loading';
@@ -16,7 +17,7 @@ function App() {
     <div className='bg-gray-50  flex flex-col'>
       
       <div>
-      <Navbar />
+        <Navbar />
       </div>
       <div className='flex-grow  mt-16 min-h-screen  max-h-full'>
         <div className='bg-purple-400/30 absolute  animate-circle h-80 w-80 rounded-full top-80 filter blur-md right-10 opacity-40 mix-blend-multiply'></div>
@@ -25,9 +26,9 @@ function App() {
 
         <Route path="/LeaderBoard" element={<LeaderBoard/>}></Route>
         <Route path="/ContactUs" element={<ContactUs/>}></Route>
-        {/* <Route path="/AboutUs" element={<AboutUs/>}></Route>
+        {/* <Route path="/AboutUs" element={<AboutUs/>}></Route>*/}
         <Route path="/Home" element={<Home/>}></Route>
-        <Route path="/Feed" element={<Feed/>}></Route> */}
+        {/*<Route path="/Feed" element={<Feed/>}></Route> */}
         <Route path="*" element={<PageNotFound/>}></Route>
 
         </Routes>
@@ -35,7 +36,7 @@ function App() {
 
       </div>
       <div>
-      <Footer />
+        <Footer />
       </div>
     </div>
     
