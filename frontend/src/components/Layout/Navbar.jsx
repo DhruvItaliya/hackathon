@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  // const myPath=window.location.pathname;
   return (
     <div>
       <header

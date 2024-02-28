@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 const Footer = () => {
   return (
     <div style={{zIndex:5}}>
@@ -96,19 +96,19 @@ const Footer = () => {
         className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:mt-0 lg:justify-end lg:gap-12"
       >
         <li>
-          <a className="text-gray-700 transition font-semibold hover:text-purple-500/75" href="#"> Feed </a>
+          <Link className="text-gray-700 transition font-semibold hover:text-purple-500/75" to="/Feed"> Feed </Link>
         </li>
 
         <li>
-          <a className="text-gray-700 transition font-semibold hover:text-purple-500/75" href="#"> Leader Board </a>
+          <Link className="text-gray-700 transition font-semibold hover:text-purple-500/75" to="/LeaderBoard"> Leader Board </Link>
         </li>
 
         <li>
-          <a className="text-gray-700 transition font-semibold hover:text-purple-500/75" href="#"> About us </a>
+          <Link className="text-gray-700 transition font-semibold hover:text-purple-500/75" to="/AboutUs"> About us </Link>
         </li>
 
         <li>
-          <a className="text-gray-700 transition font-semibold hover:text-purple-500/75" href="#"> Contact us </a>
+          <Link className="text-gray-700 transition font-semibold hover:text-purple-500/75" to="/ContactUs"> Contact us </Link>
         </li>
       </ul>
     </div>
