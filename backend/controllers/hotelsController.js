@@ -18,13 +18,19 @@ export const drivePost  = catchAsyncError(async(req, res, next)=>{
           new ErrorHandler(`You can't post drive, you are volunteer`, 400)
         );
     }
-    const { food_name, no_of_meals, consent, image }= req.body;
-    if( !food_name || !no_of_meals || !consent || !image){
+
+    if(!req.files){
+        new ErrorHandler(`Image could not get`, 400)
+    }
+
+    const image = `./uploads/drive_images/${req.file.filename}`;
+    const { food_name, no_of_meals, consent }= req.body;
+    if( !food_name || !no_of_meals || !consent || !image ){
         return next(new ErrorHandler("Please fill all required fields!"));
     }
     const posted_by = _id;
     const drive = await Drives.create({
-        food_name, no_of_meals, posted_by, consent, image
+        food_name, no_of_meals, posted_by, consent,image
     });
     res.status(200).json({
         success: true,

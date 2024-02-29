@@ -17,8 +17,15 @@ export const reviewPost = catchAsyncError(async (req, res, next) => {
             new ErrorHandler(`You can't post review, you are hotel`, 400)
         );
     }
-    const { description, improvements, image } = req.body;
-    if (!description || !improvements || !image) {
+
+    if(!req.files){
+        new ErrorHandler(`Image could not get`, 400)
+    }
+
+    const image = `./uploads/review_post_images/${req.file.filename}`;
+
+    const { description, improvements } = req.body;
+    if (!description || !improvements ) {
         return next(new ErrorHandler("Please fill all required fields!"));
     }
     const posted_by = _id;
