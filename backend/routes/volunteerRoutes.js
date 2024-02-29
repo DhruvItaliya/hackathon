@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import { reviewPost, joinDrive,myDrives_active, myDrives_inactive } from '../controllers/volunteerController.js';
+import { reviewPost, joinDrive,myDrives_active, myDrives_inactive, getReviewPost } from '../controllers/volunteerController.js';
 import { isAuthenticated } from '../middlewares/auth.js';
 import multer from 'multer';
 
@@ -27,6 +27,7 @@ router.get('/my_drives_inactive', isAuthenticated, myDrives_inactive);
 
 // from above drives user can join drive 
 router.get('/join_drive/:id', isAuthenticated, joinDrive);
+router.get('/get_Review_post', isAuthenticated, getReviewPost);
 
 // It is necessary to export module
 export default router;

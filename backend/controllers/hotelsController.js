@@ -1,8 +1,7 @@
 import { catchAsyncError } from "../middlewares/catchAsyncError.js";
 import ErrorHandler from "../middlewares/error.js";
-import { User } from "../models/userSchema.js";
+import {User} from "../models/userSchema.js";
 import { Drives } from "../models/driveSchema.js";
-import { sendToken } from "../utils/jwtToken.js";
 import { validationResult } from 'express-validator';
 
 export const drivePost  = catchAsyncError(async(req, res, next)=>{
@@ -15,7 +14,7 @@ export const drivePost  = catchAsyncError(async(req, res, next)=>{
     const {_id,role} = req.user;
     if (role !== 'hotel') {
         return next(
-          new ErrorHandler(`You can't post drive, you are volunteer`, 400)
+          new ErrorHandler(`You can't post drive, you are not hotel`, 400)
         );
     }
 
@@ -32,6 +31,7 @@ export const drivePost  = catchAsyncError(async(req, res, next)=>{
     const drive = await Drives.create({
         food_name, no_of_meals, posted_by, consent,image
     });
+    const updatedHotel = await User.findByIdAndUpdate(_id, { $inc: { ndrive: 1 } }, { new: true });
     res.status(200).json({
         success: true,
         message: "Drive added Successfully",

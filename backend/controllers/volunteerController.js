@@ -1,6 +1,7 @@
 import { catchAsyncError } from "../middlewares/catchAsyncError.js";
 import ErrorHandler from "../middlewares/error.js";
 import { VolunteerReview } from "../models/volunteerReviewSchema.js";
+import { validationResult } from "express-validator";
 import { Drives } from "../models/driveSchema.js";
 
 export const reviewPost = catchAsyncError(async (req, res, next) => {
@@ -10,6 +11,7 @@ export const reviewPost = catchAsyncError(async (req, res, next) => {
     if (!error.isEmpty()) {
         return next(new ErrorHandler(errorMsg, 400));
     }
+
     const { _id, role } = req.user;
 
     if (role !== 'volunteer') {
@@ -17,27 +19,37 @@ export const reviewPost = catchAsyncError(async (req, res, next) => {
             new ErrorHandler(`You can't post review, you are hotel`, 400)
         );
     }
-
+  
     if(!req.files){
         new ErrorHandler(`Image could not get`, 400)
     }
 
     const image = `./uploads/review_post_images/${req.file.filename}`;
-
-    const { description, improvements } = req.body;
-    if (!description || !improvements ) {
-        return next(new ErrorHandler("Please fill all required fields!"));
+    const { description, improvements, for_drive } = req.body;
+    const drive = await Drives.findById({ _id: for_drive });
+    const userIndex = drive.contributed_by.indexOf(_id);
+    if (userIndex === -1) {
+        return next(new ErrorHandler("You can't post review for this drive, bcz you didn't participated in it"));
+    }else {
+        if(drive.review_post_by[userIndex] === false){
+            if (!description || !improvements || !image) {
+                return next(new ErrorHandler("Please fill all required fields!"));
+            }
+            const posted_by = _id;
+            const review = await VolunteerReview.create({
+                for_drive, posted_by, description, improvements, image
+            });
+            drive.review_post_by[userIndex] = true;
+            await drive.save();
+            res.status(200).json({
+                success: true,
+                message: "Review added",
+                review
+            });
+        }else{
+            return next(new ErrorHandler("You can't post review for this drive, bcz you uploaded already"));
+        }
     }
-    const posted_by = _id;
-    const drive_for = drive_id;
-    const review = await VolunteerReview.create({
-        drive_for, posted_by, description, improvements, image
-    });
-    res.status(200).json({
-        success: true,
-        message: "Review added",
-        review
-    });
 });
 
 export const joinDrive = catchAsyncError(async (req, res, next) => {
@@ -56,6 +68,9 @@ export const joinDrive = catchAsyncError(async (req, res, next) => {
     }
     if (drive.contributed_by.includes(userId)) {
         return next(new ErrorHandler("You have already joined this drive.", 400));
+    }
+    if(drive.contributed_by.length >= Math.ceil(drive.no_of_meals / 10)){
+        return next(new ErrorHandler("Sorry You can't join bcz volunteers already joined it", 400));   
     }
 
     // Proceed to add the user to the contributed_by array
@@ -114,5 +129,20 @@ export const myDrives_inactive = catchAsyncError(async (req, res, next) => {
     res.status(200).json({
         success: true,
         finalDrives,
+    });
+});
+
+export const getReviewPost = catchAsyncError(async (req, res, next) => {
+    const { _id, role } = req.user;
+    if (role !== 'volunteer') {
+        return next(
+            new ErrorHandler(`You can't get campaign details, you are not Volunteer`, 400)
+        );
+    }
+    const volunteerReview = await VolunteerReview.find({posted_by : _id});
+    res.status(200).json({
+        success: true,
+        message: "Fetched successfully",
+        volunteerReview
     });
 });
