@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React from 'react'
+import { Link } from 'react-router-dom'
 const Footer = () => {
   return (
     <div style={{ zIndex: 5 }}>
@@ -11,7 +11,6 @@ const Footer = () => {
               href="#MainContent"
             >
               <span className="sr-only">Back to top</span>
-
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -62,7 +61,6 @@ const Footer = () => {
                 <a className="text-gray-700 transition font-semibold hover:text-purple-500/75" href="#"> Join us </a>
               </li>
             </ul>
-
             <div className="mt-8 lg:mt-0">
               {/* Social Media Logos */}
               <a href="#" className="mr-4">
@@ -100,5 +98,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-

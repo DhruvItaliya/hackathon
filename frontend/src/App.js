@@ -12,28 +12,45 @@ import { Routes, Route, Link } from 'react-router-dom';
 import Signup from './components/Signup';
 import LeaderBoard from './components/Leaderboard';
 import PageNotFound from './components/NotFound/NotFound';
-function App() {
 
+import SidebarVol from './components/Layout/sideVolunteer';
+import SideHotel from './components/Layout/sideHotel';
+import SideAdmin from './components/Layout/sideAdmin';
+import UserProfile from './components/userprofile';
+import GetReport from './components/hotel/getreport';
+ let userTypeFromSession="hotel";
+ function App() {
   return (
     <div className='bg-gray-50  flex flex-col'>
 
       <div>
         <Navbar />
       </div>
-      <div className='flex-grow  mt-16 min-h-screen  max-h-full'>
-        <div className='bg-purple-400/30 absolute  animate-circle h-80 w-80 rounded-full top-80 filter blur-md right-10 opacity-40 mix-blend-multiply'></div>
-        <div className='bg-yellow-200 absolute animation-delay-4000 mix-blend-multiply animate-circle h-72 w-72 rounded-full top-72 filter blur-md right-12 opacity-40 '></div>
+          
+      <div className='flex-grow flex-row mt-16 min-h-screen  max-h-full'>
+        
+        <div className='bg-purple-400/30 absolute  animate-circle h-80 w-80 rounded-full top-80 filter blur-md right-40 opacity-40 mix-blend-multiply'></div>
+        <div className='bg-yellow-200 absolute animation-delay-4000 mix-blend-multiply animate-circle h-72 w-72 rounded-full top-72 filter blur-md right-40 opacity-40 '></div>
+        <div className='flex w-full'>
+          <div>
+            {userTypeFromSession==="volunteer"?<SidebarVol/>:userTypeFromSession==="hotel"?<SideHotel/>:userTypeFromSession==="admin"?<SideAdmin/>:null}
+          </div>
+          <div className='w-full' >
+            
         <Routes>
-
-          <Route path="/LeaderBoard" element={<LeaderBoard />}></Route>
-          <Route path="/ContactUs" element={<ContactUs />}></Route>
-          <Route path="/AboutUs" element={<AboutUs />}></Route>
-          <Route path="/Home" element={<Home />}></Route>
-          {/*<Route path="/Feed" element={<Feed/>}></Route> */}
-          <Route path="*" element={<PageNotFound />}></Route>
+        <Route path='/UserProfile' element={<UserProfile/>}></Route>
+        <Route path="/LeaderBoard" element={<LeaderBoard/>}></Route>
+        <Route path="/ContactUs" element={<ContactUs/>}></Route>
+        <Route path="/AboutUs" element={<AboutUs />}></Route>
+        <Route path='/Home'  element={<Home/>}></Route>
+        <Route path="/" exact render element={<Home/>}></Route>
+        <Route path="*" element={<PageNotFound/>}></Route>
+        <Route path="/GetReport" render element={<GetReport/>}></Route>
 
         </Routes>
-
+        
+        </div>
+        </div>
 
       </div>
       <div>

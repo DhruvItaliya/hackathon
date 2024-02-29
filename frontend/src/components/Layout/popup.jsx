@@ -3,16 +3,16 @@ import React from 'react'
 const Popup = (props) => {
   return (
     <div className='w-80 drop-shadow-2xl absolute top-20 right-2' >
-      <div role="alert" class="rounded-xl border border-gray-100 bg-white p-4">
-  <div class="flex items-start gap-4">
-    <span class="text-green-600">
+      <div role="alert" className="rounded-xl border border-gray-100 bg-white p-4">
+  <div className="flex items-start gap-4">
+    <span className="text-green-600">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth="1.5"
         stroke="currentColor"
-        class="h-6 w-6"
+        className="h-6 w-6"
       >
         <path
           strokeLinecap="round"
@@ -22,17 +22,17 @@ const Popup = (props) => {
       </svg>
     </span>
 
-    <div class="flex-1">
-      <strong class="block font-medium text-gray-900"> {props.title} </strong>
+    <div className="flex-1">
+      <strong className="block font-medium text-gray-900"> {props.title} </strong>
 
-      <p class="mt-1 text-sm text-gray-700">{props.description}</p>
+      <p className="mt-1 text-sm text-gray-700">{props.description}</p>
 
-      <div class="mt-4 flex gap-2">
+      <div className="mt-4 flex gap-2">
         <a
           href="#"
-          class="inline-flex items-center gap-2 rounded-lg bg-purple-500 px-4 py-2 text-white hover:bg-indigo-700"
+          className="inline-flex items-center gap-2 rounded-lg bg-purple-500 px-4 py-2 text-white hover:bg-indigo-700"
         >
-          <span class="text-sm font-semibold"> Ok </span>
+          <span className="text-sm font-semibold"> Ok </span>
 
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +40,7 @@ const Popup = (props) => {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            class="h-4 w-4"
+            className="h-4 w-4"
           >
             <path
               strokeLinecap="round"
@@ -50,8 +50,8 @@ const Popup = (props) => {
           </svg>
         </a>
 
-        <button class="block rounded-lg px-4 py-2 text-gray-700 transition hover:bg-gray-50">
-          <span class="text-sm">Cancle</span>
+        <button className="block rounded-lg px-4 py-2 text-gray-700 transition hover:bg-gray-50">
+          <span className="text-sm">Cancle</span>
         </button>
       </div>
     </div>

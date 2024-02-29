@@ -7,7 +7,8 @@ import { errorMiddleware } from "./middlewares/error.js";
 import userRoutes from "./routes/userRoutes.js"
 import hotelsRoutes from "./routes/hotelsRoutes.js"
 import volunteerRoutes from "./routes/volunteerRoutes.js"
-
+import adminRoutes from "./routes/adminRoutes.js"
+import woLoginRoutes from "./routes/woLoginRoutes.js"
 const app = express();
 dotenv.config();
 
@@ -21,9 +22,11 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+app.use('/',woLoginRoutes);
 app.use('/user', userRoutes);
 app.use('/hotels', hotelsRoutes);
 app.use('/volunteer', volunteerRoutes);
+app.use('/admin', adminRoutes);
 
 dbConnection();
 

@@ -66,11 +66,6 @@ function stats() {
                                     <path d="M3 22V13C3 12.1727 3.17267 12 4 12H7" stroke-linecap="round" stroke-linejoin="round" />
                                     <path d="M22 22H2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-
-
-
-
-
                                 <h2 class="title-font font-medium text-3xl text-gray-900">3</h2>
                                 <p class="leading-relaxed">Cities</p>
                             </div>
