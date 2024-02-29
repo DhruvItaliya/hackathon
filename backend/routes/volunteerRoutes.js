@@ -2,11 +2,24 @@ import express from 'express';
 const router = express.Router();
 import { reviewPost, joinDrive,myDrives_active, myDrives_inactive, getReviewPost } from '../controllers/volunteerController.js';
 import { isAuthenticated } from '../middlewares/auth.js';
+import multer from 'multer';
 
 //Destructuring body and validationResult
 import { body } from 'express-validator';
 
-router.post('/review_post', isAuthenticated, reviewPost);
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        return cb(null, './uploads/review_post_images');
+    },
+    filename: (req, file, cb) => {
+        const fileExtension = file.originalname.split('.').pop();
+        cb(null, `${"hello"}_${file.fieldname}_${Date.now()}.${fileExtension}`);
+    },
+});
+
+const upload = multer({ storage });
+
+router.post('/review_post',upload.single('image'), isAuthenticated, reviewPost);
 
 // we showing active and inactive drives to user 
 router.get('/my_drives_active', isAuthenticated, myDrives_active);

@@ -19,7 +19,13 @@ export const reviewPost = catchAsyncError(async (req, res, next) => {
             new ErrorHandler(`You can't post review, you are hotel`, 400)
         );
     }
-    const { description, improvements, image, for_drive } = req.body;
+  
+    if(!req.files){
+        new ErrorHandler(`Image could not get`, 400)
+    }
+
+    const image = `./uploads/review_post_images/${req.file.filename}`;
+    const { description, improvements, for_drive } = req.body;
     const drive = await Drives.findById({ _id: for_drive });
     const userIndex = drive.contributed_by.indexOf(_id);
     if (userIndex === -1) {
