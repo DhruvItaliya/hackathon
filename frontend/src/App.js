@@ -11,6 +11,7 @@ import { Routes, Route, Link} from 'react-router-dom';
 import Signup from './components/signup';
 import LeaderBoard from './components/leaderboard';
 import PageNotFound from './components/NotFound/NotFound';
+
 import SidebarVol from './components/Layout/sideVolunteer';
 import SideHotel from './components/Layout/sideHotel';
 import SideAdmin from './components/Layout/sideAdmin';
@@ -18,7 +19,6 @@ import UserProfile from './components/userprofile';
 import GetReport from './components/hotel/getreport';
  let userTypeFromSession="hotel";
  function App() {
- 
   return (
     <div className='bg-gray-50  flex flex-col'>
       
@@ -46,8 +46,7 @@ import GetReport from './components/hotel/getreport';
         <Route path="/GetReport" render element={<GetReport/>}></Route>
 
         </Routes>
-        {/* <LeaderBoard/>
-        <LeaderBoard/> */}
+        
         </div>
         </div>
 
