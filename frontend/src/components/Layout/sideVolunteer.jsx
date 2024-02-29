@@ -1,7 +1,7 @@
 import React from 'react'
 import { MdOutlinePostAdd } from "react-icons/md";
 import { Link } from 'react-router-dom';
-
+import { TbReport } from 'react-icons/tb';
 
 const SidebarVol = () => {
   const logOut=()=>{
@@ -62,7 +62,19 @@ const SidebarVol = () => {
           </li>
 
        
-
+          <li>
+            <Link
+              to="/VolunteerReport"
+              className="group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+            >
+              <TbReport stroke='black'  size={23}/>
+              <span
+                className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible"
+              >
+                Get Report
+              </span>
+            </Link>
+          </li>
           <li>
             <Link
               to='UserProfile'

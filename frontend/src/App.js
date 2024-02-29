@@ -11,12 +11,14 @@ import { Routes, Route, Link} from 'react-router-dom';
 import Signup from './components/signup';
 import LeaderBoard from './components/leaderboard';
 import PageNotFound from './components/NotFound/NotFound';
-
+import VolunteerReport from './components/volunteer/getreportforcustomer';
 import SidebarVol from './components/Layout/sideVolunteer';
 import SideHotel from './components/Layout/sideHotel';
 import SideAdmin from './components/Layout/sideAdmin';
 import UserProfile from './components/userprofile';
 import GetReport from './components/hotel/getreport';
+import AddDrive from './components/hotel/adddrive';
+import Bubbles from './components/Layout/bubbles';
  let userTypeFromSession="hotel";
  function App() {
   return (
@@ -25,11 +27,9 @@ import GetReport from './components/hotel/getreport';
       <div>
         <Navbar />
       </div>
-
-      <div className='flex-grow flex-row mt-16 min-h-screen  max-h-full'>
-        
-        <div className='bg-purple-400/30 absolute  animate-circle h-80 w-80 rounded-full top-80 filter blur-md right-40 opacity-40 mix-blend-multiply'></div>
-        <div className='bg-yellow-200 absolute animation-delay-4000 mix-blend-multiply animate-circle h-72 w-72 rounded-full top-72 filter blur-md right-40 opacity-40 '></div>
+      <Bubbles/>
+      <div className='flex-grow flex-row mt-16 min-h-screen  max-h-full' style={{zIndex:4}}>
+       
         <div className='flex w-full'>
           <div>
             {userTypeFromSession==="volunteer"?<SidebarVol/>:userTypeFromSession==="hotel"?<SideHotel/>:userTypeFromSession==="admin"?<SideAdmin/>:null}
@@ -44,8 +44,11 @@ import GetReport from './components/hotel/getreport';
         <Route path="/" exact render element={<Home/>}></Route>
         <Route path="*" element={<PageNotFound/>}></Route>
         <Route path="/GetReport" render element={<GetReport/>}></Route>
-
-        </Routes>
+        <Route path='/adddrive' element={<AddDrive/>}></Route>
+        <Route path="/VolunteerReport" element={<VolunteerReport/>}
+       ></Route>
+       
+       </Routes>
         
         </div>
         </div>
