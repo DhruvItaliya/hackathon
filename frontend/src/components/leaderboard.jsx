@@ -8,6 +8,24 @@ const LeaderBoard = (props) => {
         setData([
             { name: "smit", type: "volunteer", city: "anand", badge: "golden", point: 5 },
             { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
+            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
+            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
+            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
+            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
+            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
+            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
+            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
+            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
+            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
+            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
+            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
+            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
+            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
+            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
+            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
+            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
+            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
+            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
             { name: "abc", type: "volunteer", city: "ahmedabad", badge: "diamond", point: 456 }
         ]);
 

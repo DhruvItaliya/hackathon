@@ -2,7 +2,7 @@ import react from "react";
 import { useEffect, useState } from "react";
 
 const UserProfile = (props) => {
-    const [data, setdata] = useState({});
+    const [data, setdata] = useState(null);
 
     useEffect(() => {
         //fetch data using session id
@@ -10,7 +10,7 @@ const UserProfile = (props) => {
     }, []);
     return (
         <div className="w-full flex items-center my-4  justify-center">
-            <div className="bg-white max-w-full w-4/5  shadow overflow-hidden sm:rounded-lg">
+           {data!==null&& <div className="bg-white max-w-full w-4/5  shadow overflow-hidden sm:rounded-lg">
                 <div className="px-4 py-5 sm:px-6">
                     <span className="text-3xl mx-3 leading-6 font-medium text-gray-900">
                         {data.name.toUpperCase()}
@@ -66,17 +66,20 @@ const UserProfile = (props) => {
                                 {data.city}
                                 </dd>
                         </div>
-                        <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt className="text-xl font-medium text-gray-500">
                                 Age
                             </dt>
                             <dd className="mt-1 text-xl text-gray-900 sm:mt-0 sm:col-span-2">
                                 {data.age}
-                                </dd>
+                            </dd>
                         </div>
                     </dl>
                 </div>
-            </div>
+            </div>}
+            {data===null &&  <span className="text-3xl m-3 leading-6 font-medium text-gray-900">
+                        Oops No data found
+                    </span>}
         </div>);
 };
 export default UserProfile;

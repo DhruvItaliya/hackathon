@@ -16,7 +16,8 @@ import SidebarVol from './components/Layout/sideVolunteer';
 import SideHotel from './components/Layout/sideHotel';
 import SideAdmin from './components/Layout/sideAdmin';
 import UserProfile from './components/userprofile';
- let userTypeFromSession;
+import GetReport from './components/hotel/getreport';
+ let userTypeFromSession="hotel";
  function App() {
   return (
     <div className='bg-gray-50  flex flex-col'>
@@ -34,14 +35,15 @@ import UserProfile from './components/userprofile';
             {userTypeFromSession==="volunteer"?<SidebarVol/>:userTypeFromSession==="hotel"?<SideHotel/>:userTypeFromSession==="admin"?<SideAdmin/>:null}
           </div>
           <div className='w-full' >
-            <UserProfile/>
-        <Routes >
-
+            
+        <Routes>
+        <Route path='/UserProfile' element={<UserProfile/>}></Route>
         <Route path="/LeaderBoard" element={<LeaderBoard/>}></Route>
         <Route path="/ContactUs" element={<ContactUs/>}></Route>
-        <Route path='/Login' element={<Login/>}></Route>
-        <Route path='/SignUp' element={<Signup/>}></Route>
+        <Route path='/Home'  element={<Home/>}></Route>
+        <Route path="/" exact render element={<Home/>}></Route>
         <Route path="*" element={<PageNotFound/>}></Route>
+        <Route path="/GetReport" render element={<GetReport/>}></Route>
 
         </Routes>
         

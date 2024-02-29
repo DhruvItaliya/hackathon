@@ -3,6 +3,10 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import { TbReport } from "react-icons/tb";
 
 const SideAdmin = () => {
+  const logOut=()=>{
+    sessionStorage.clear();
+    window.location.assign("home");
+  }
   return (
     <div className='h-full min-h-screen'>
       <div className="flex w-16 min-h-screen h-full flex-col justify-between border-e bg-white">
@@ -43,7 +47,8 @@ const SideAdmin = () => {
   <div className="sticky inset-x-0 bottom-0 border-t border-gray-100 bg-white p-2">
     <form action="#">
       <button
-        type="submit"
+        type="button"
+        onClick={logOut}
         className="group relative flex w-full justify-center rounded-lg px-2 py-1.5 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
       >
         <svg
