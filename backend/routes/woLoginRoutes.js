@@ -1,7 +1,9 @@
 import express from 'express';
 const router = express.Router();
-import { getFeed } from '../controllers/woLoginController.js';
+import { getFeed, postContact, getUsers } from '../controllers/woLoginController.js';
 
 router.get('/get_feed', getFeed);
+router.get('/get_users', getUsers);
+router.post('/contact_us', postContact);
 
 export default router;
