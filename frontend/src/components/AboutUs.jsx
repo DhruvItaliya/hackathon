@@ -76,21 +76,21 @@ function AboutUs() {
             <div className="my-8 text-center">
                 <div className="my-8">
                     <h2 className="text-3xl font-bold mb-1">Our Vision</h2>
-                    <p className='group border-s-4 border-green-500 bg-gray-50 p-3 mb-1'>{visionStatement}</p>
+                    <p className='group border-s-4 border-purple-400 bg-gray-50 p-3 mb-1'>{visionStatement}</p>
                 </div>
                 <div className="my-8">
                     <h2 className="text-3xl font-bold mb-1">Our Mission</h2>
-                    <p className='group border-s-4 border-green-500 bg-gray-50 p-3 mb-1'>{missionStatement}</p>
+                    <p className='group border-s-4 border-purple-400 bg-gray-50 p-3 mb-1'>{missionStatement}</p>
                 </div>
             </div>
 
 
             <h1 className="text-3xl font-bold text-black my-8 text-center">Frequently Asked Questions</h1>
-            <div className="space-y-4">
+            <div className="space-y-4 overflow-hidden">
                 {faqData.map((faq, index) => (
                     <details
                         key={index}
-                        className="group border-s-4 border-green-500  bg-gray-50 p-6 [&_summary::-webkit-details-marker]:hidden"
+                        className="group border-s-4 border-purple-400  bg-gray-50 p-6 [&_summary::-webkit-details-marker]:hidden"
                     >
                         <summary className="flex cursor-pointer  items-center justify-between gap-1.5">
                             <h2 className="text-lg font-medium text-gray-900">{faq.question}</h2>

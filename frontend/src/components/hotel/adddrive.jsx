@@ -32,7 +32,7 @@ const AddDrive = () => {
                 <label htmlFor="meals" className="block mb-2 text-xl font-medium text-gray-900">Upload image</label>
                 </div>
              
-<input class="block h-10 w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none" multiple id="default_size" required type="file"/>
+<input className="block h-10 w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none" multiple id="default_size" required type="file"/>
 
 
               <div className="flex">

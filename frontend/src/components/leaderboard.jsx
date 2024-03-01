@@ -62,7 +62,7 @@ const LeaderBoard = (props) => {
                             </thead>
                             <tbody>
                                 {data.length && data.map((ele, index) => (
-                                    <tr key={index} className={`odd:bg-opacity-30 hover:bg-gray-200 hover:bg-opacity- even:bg-opacity-30 my-2`}>
+                                    <tr key={index} className={`odd:bg-opacity-30 hover:bg-gray-200 hover:bg-opacity-50 even:bg-opacity-30 my-2`}>
                                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                             {ele.name}
                                         </th>
