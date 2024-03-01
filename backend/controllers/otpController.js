@@ -1,5 +1,5 @@
-import { catchAsyncError } from "../middleware/catchAsyncError.js";
-import ErrorHandler from "../middleware/error.js";
+import { catchAsyncError } from "../middlewares/catchAsyncError.js";
+import ErrorHandler from "../middlewares/error.js";
 import { User } from "../models/userSchema.js";
 import {OTP} from "../models/otpSchema.js";
 import nodemailer from 'nodemailer';
