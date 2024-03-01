@@ -8,47 +8,53 @@ import Popup from './components/Layout/Popup';
 import Loading from './components/Layout/Loading';
 import ContactUs from './components/Contactus';
 import AboutUs from './components/AboutUs';
-import Login from './components/Login';
+import Login from './components/login';
 import { Routes, Route, Link } from 'react-router-dom';
-import Signup from './components/Signup';
-import LeaderBoard from './components/Leaderboard';
+import Signup from './components/signup';
+import LeaderBoard from './components/leaderboard';
 import PageNotFound from './components/NotFound/NotFound';
-
-import SidebarVol from './components/Layout/SideVolunteer';
-import SideHotel from './components/Layout/SideHotel';
-import SideAdmin from './components/Layout/SideAdmin';
-import UserProfile from './components/Userprofile';
-import GetReport from './components/Hotel/GetReport';
-let userTypeFromSession = "Hotel";
-function App() {
+import VolunteerReport from './components/volunteer/getreportforcustomer';
+import SidebarVol from './components/volunteer/sideVolunteer';
+import SideHotel from './components/hotel/sideHotel';
+import SideAdmin from './components/Layout/sideAdmin';
+import UserProfile from './components/userprofile';
+import GetReport from './components/hotel/getreport';
+import AddDrive from './components/hotel/adddrive';
+import Bubbles from './components/Layout/bubbles';
+import FeedCard from './components/feedCard';
+import FeedPage from './components/feedPage';
+ let userTypeFromSession="hotel";
+ function App() {
   return (
-    <div className='bg-gray-50  flex flex-col'>
+    <div id="MainContent" className='bg-gray-50  flex flex-col'>
       <div>
         <Navbar />
       </div>
-
-      <div className='flex-grow flex-row mt-16 min-h-screen  max-h-full'>
-
-        <div className='bg-purple-400/30 absolute  animate-circle h-80 w-80 rounded-full top-80 filter blur-md right-40 opacity-40 mix-blend-multiply'></div>
-        <div className='bg-yellow-200 absolute animation-delay-4000 mix-blend-multiply animate-circle h-72 w-72 rounded-full top-72 filter blur-md right-40 opacity-40 '></div>
+      <Bubbles/>
+      <div className='flex-grow flex-row mt-16 min-h-screen  max-h-full' style={{zIndex:4}}>
+       
         <div className='flex w-full'>
           <div>
-            {userTypeFromSession === "volunteer" ? <SidebarVol /> : userTypeFromSession === "Hotel" ? <SideHotel /> : userTypeFromSession === "admin" ? <SideAdmin /> : null}
+            {userTypeFromSession === "volunteer" ? <SidebarVol /> : userTypeFromSession === "hotel" ? <SideHotel /> : userTypeFromSession === "admin" ? <SideAdmin /> : null}
           </div>
           <div className='w-full' >
-
-            <Routes>
-              <Route path='/UserProfile' element={<UserProfile />}></Route>
-              <Route path="/LeaderBoard" element={<LeaderBoard />}></Route>
-              <Route path="/ContactUs" element={<ContactUs />}></Route>
-              <Route path="/AboutUs" element={<AboutUs />}></Route>
-              <Route path='/Home' element={<Home />}></Route>
-              <Route path='/Feed' element={<Feed />}></Route>
-              <Route path="/" exact render element={<Home />}></Route>
-              <Route path="*" element={<PageNotFound />}></Route>
-              <Route path="/GetReport" render element={<GetReport />}></Route>
-            </Routes>
-          </div>
+        <Routes>
+        <Route path='/UserProfile' element={<UserProfile/>}></Route>
+        <Route path="/LeaderBoard" element={<LeaderBoard/>}></Route>
+        <Route path="/ContactUs" element={<ContactUs/>}></Route>
+        <Route path='/Home'  element={<Home/>}></Route>
+        <Route path="/" exact render element={<Home/>}></Route>
+        <Route path="*" element={<PageNotFound/>}></Route>
+        <Route path="/GetReport" render element={<GetReport/>}></Route>
+        <Route path='/adddrive' element={<AddDrive/>}></Route>
+        <Route path="/feed" element={<FeedPage/>}></Route>
+        <Route path='/aboutus' element={<AboutUs/>}></Route>
+        <Route path="/VolunteerReport" element={<VolunteerReport/>}
+       ></Route>
+       
+       </Routes>
+        
+        </div>
         </div>
       </div>
       <div>
