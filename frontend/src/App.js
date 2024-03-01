@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
 import Home from './components/Home/Home';
+import Feed from './components/Feed';
 import Error from './components/NotFound/Error';
 import Popup from './components/Layout/Popup';
 import Loading from './components/Layout/Loading';
@@ -42,6 +43,7 @@ function App() {
               <Route path="/ContactUs" element={<ContactUs />}></Route>
               <Route path="/AboutUs" element={<AboutUs />}></Route>
               <Route path='/Home' element={<Home />}></Route>
+              <Route path='/Feed' element={<Feed />}></Route>
               <Route path="/" exact render element={<Home />}></Route>
               <Route path="*" element={<PageNotFound />}></Route>
               <Route path="/GetReport" render element={<GetReport />}></Route>

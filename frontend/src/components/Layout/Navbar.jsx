@@ -11,20 +11,7 @@ const Navbar = () => {
             <div className="md:flex md:items-center md:gap-12">
               <Link className="block text-purple-500" to="/">
                 <span className="sr-only">Home</span>
-                <svg width="58" height="58" viewBox="0 0 319 318" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <ellipse cx="154.954" cy="187.649" rx="80.5" ry="90.5" transform="rotate(-16.8089 154.954 187.649)" fill="#B764DD" />
-                  <ellipse cx="176.658" cy="192.061" rx="68" ry="80" transform="rotate(-16.8089 176.658 192.061)" fill="white" />
-                  <g style={{ mixBlendMode: "multiply" }}>
-                    <ellipse cx="154.404" cy="160.403" rx="121.469" ry="125.808" transform="rotate(-17.4423 154.404 160.403)" fill="#B764DD" />
-                    <ellipse cx="186.851" cy="165.509" rx="102.607" ry="111.211" transform="rotate(-17.4423 186.851 165.509)" fill="white" />
-                  </g>
-                  <g style={{ mixBlendMode: "multiply" }}>
-                    <ellipse cx="157.187" cy="178.76" rx="101.761" ry="107.186" transform="rotate(-17.0479 157.187 178.76)" fill="#B764DD" />
-                    <ellipse cx="177.128" cy="179.786" rx="89.5794" ry="101.016" transform="rotate(-17.0479 177.128 179.786)" fill="white" />
-                  </g>
-                </svg>
-
-
+                <img src="mealMission.svg" className="h-9 w-auto" alt="mealMission"/>
               </Link>
             </div>
 
