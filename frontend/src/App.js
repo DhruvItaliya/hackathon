@@ -20,6 +20,8 @@ import UserProfile from './components/userprofile';
 import GetReport from './components/hotel/getreport';
 import AddDrive from './components/hotel/adddrive';
 import Bubbles from './components/Layout/bubbles';
+import FeedCard from './components/feedCard';
+import FeedPage from './components/feedPage';
  let userTypeFromSession="hotel";
  function App() {
   return (
@@ -35,7 +37,7 @@ import Bubbles from './components/Layout/bubbles';
             {userTypeFromSession === "volunteer" ? <SidebarVol /> : userTypeFromSession === "hotel" ? <SideHotel /> : userTypeFromSession === "admin" ? <SideAdmin /> : null}
           </div>
           <div className='w-full' >
-            
+               
         <Routes>
         <Route path='/UserProfile' element={<UserProfile/>}></Route>
         <Route path="/LeaderBoard" element={<LeaderBoard/>}></Route>
@@ -45,6 +47,7 @@ import Bubbles from './components/Layout/bubbles';
         <Route path="*" element={<PageNotFound/>}></Route>
         <Route path="/GetReport" render element={<GetReport/>}></Route>
         <Route path='/adddrive' element={<AddDrive/>}></Route>
+        <Route path="/feed" element={<FeedPage/>}></Route>
         <Route path='/aboutus' element={<AboutUs/>}></Route>
         <Route path="/VolunteerReport" element={<VolunteerReport/>}
        ></Route>
