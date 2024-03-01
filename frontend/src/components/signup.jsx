@@ -7,10 +7,8 @@ const Signup = () => {
         <div className="flex justify-center items-center">
           <section className='w-full'>
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto  lg:py-0 ">
-              <Link to="/" className="flex text-bold  items-center mb-6 text-3xl font-semibold text-gray-900 ">
-                {/* <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" /> */}
-
-                Lorem Ipsum
+              <Link to="/" className="flex items-center mb-6 text-3xl font-semibold text-purple-600 underline">
+              <img src="mealMission.svg" className="h-9 w-auto" alt="mealMission" />
               </Link>
               <div className="w-full bg-white rounded-lg shadow drop-shadow-2xl md:mt-0 sm:max-w-md xl:p-0 border-b-4 border-l-4 border-l-purple-600 border-b-purple-600">
                 <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -18,7 +16,7 @@ const Signup = () => {
                     Create an account
                   </h1>
                   <form method='post' className="space-y-4 md:space-y-6" action="#">
-                  <div className="flex">
+                    <div className="flex">
                       <div className="flex items-center h-5">
                         <input id="helper-radio1" aria-describedby="helper-radio-text" type="radio" name="myRad" value="hotel" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300  dark:bg-gray-700 dark:border-gray-600" />
                       </div>
@@ -31,7 +29,7 @@ const Signup = () => {
                     </div>
                     <div className="flex">
                       <div className="flex items-center h-5">
-                        <input id="helper-radio2" aria-describedby="helper-radio-text" type="radio" name="myRad"  value="volunteer" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300  dark:bg-gray-700 dark:border-gray-600" />
+                        <input id="helper-radio2" aria-describedby="helper-radio-text" type="radio" name="myRad" value="volunteer" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300  dark:bg-gray-700 dark:border-gray-600" />
                       </div>
                       <div className="ms-2 text-sm">
                         <label for="helper-radio2" className="font-medium text-gray-900 ">Volunteer</label>
@@ -42,7 +40,10 @@ const Signup = () => {
                     </div>
                     <div>
                       <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Your email</label>
-                      <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" placeholder="name@company.com" required="" />
+                      <div className='flex space-x-1'>
+                      <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 w-[80%] text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block p-2.5" placeholder="name@company.com" required="" />
+                      <button className='w-[20%] bg-purple-500 text-white rounded-md hover:bg-purple-700'>Get OTP</button>
+                      </div>
                     </div>
 
                     <div>
@@ -61,7 +62,7 @@ const Signup = () => {
                       <label htmlFor="city" className="block mb-2 text-sm font-medium text-gray-900">Your city</label>
                       <input type="text" name="city" id="city" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" placeholder="e.g. Paris, France" required="" />
                     </div>
-                      <label className='block mb-2 text-sm font-medium text-gray-900'>Your role</label>
+                    <label className='block mb-2 text-sm font-medium text-gray-900'>Your role</label>
                     <div>
                       <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Password</label>
                       <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" required="" />

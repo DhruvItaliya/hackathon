@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
 import Home from './components/Home/Home';
-import Error from './components/NotFound/error';
-import Popup from './components/Layout/popup';
-import Loading from './components/Layout/loading';
-import ContactUs from './components/contactus';
+import Feed from './components/Feed';
+import Error from './components/NotFound/Error';
+import Popup from './components/Layout/Popup';
+import Loading from './components/Layout/Loading';
+import ContactUs from './components/Contactus';
 import AboutUs from './components/AboutUs';
 import Login from './components/login';
 import { Routes, Route, Link } from 'react-router-dom';
@@ -37,7 +38,6 @@ import FeedPage from './components/feedPage';
             {userTypeFromSession === "volunteer" ? <SidebarVol /> : userTypeFromSession === "hotel" ? <SideHotel /> : userTypeFromSession === "admin" ? <SideAdmin /> : null}
           </div>
           <div className='w-full' >
-               
         <Routes>
         <Route path='/UserProfile' element={<UserProfile/>}></Route>
         <Route path="/LeaderBoard" element={<LeaderBoard/>}></Route>

@@ -4,8 +4,8 @@ function stats() {
     return (
         <>
             <section className="text-gray-600 body-font">
-                <div className="container px-5 py-24 mx-auto">
-                    <div className="flex flex-col text-center w-full mb-20">
+                <div className="container px-5 py-6 mx-auto">
+                    <div className="flex flex-col text-center w-full mb-10">
                         <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Our Reach</h1>
                         <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Our Reach extends far and wide, uniting volunteers and hotels across cities, as we work tirelessly to distribute surplus food and alleviate hunger in our communities.</p>
                         <div className="flex mt-3 justify-center">
