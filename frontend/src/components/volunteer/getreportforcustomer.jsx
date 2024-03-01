@@ -3,6 +3,7 @@ import { useState } from 'react';
 import jsPDF from 'jspdf';
 import Chart from 'chart.js/auto';
 import html2pdf from 'html2pdf.js';
+import {toast} from 'react-toastify'
 
 const VolunteerReport = () => {
     const [drives, setdrives] = useState(0);
@@ -23,6 +24,7 @@ const VolunteerReport = () => {
                 html2canvas: { scale: 1 },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
             });
+            toast.success("Pdf has been downloaded successfully");
         }
     };
 

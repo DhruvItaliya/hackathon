@@ -2,10 +2,12 @@ import React from 'react'
 import { IoAddCircleOutline } from "react-icons/io5";
 import { TbReport } from "react-icons/tb";
 import { Link } from 'react-router-dom';
-
+import {toast} from 'react-toastify'
 const SideHotel = () => {
   const logOut=()=>{
     sessionStorage.clear();
+    toast.success("You have been logged out successfully");
+
     window.location.assign('home');
   }
   return (

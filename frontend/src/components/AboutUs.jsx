@@ -73,7 +73,7 @@ function AboutUs() {
     return (
 
         <div className="container mx-auto px-4">
-            <div className="my-8 text-center mr-64 ml-64 py-1 bg-[#ede6f3] rounded-md">
+            <div className="my-8 text-center mr-64 ml-64 py-1 shadow-xl backdrop-blur-sm  bg-[#ede6f3] rounded-md">
                 <div className="my-8">
                     <h2 className="text-3xl font-bold mb-1">Our Vision</h2>
                     <p className='p-5 mb-1'>{visionStatement}</p>

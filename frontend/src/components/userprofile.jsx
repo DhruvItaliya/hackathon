@@ -6,7 +6,7 @@ const UserProfile = (props) => {
 
     useEffect(() => {
         //fetch data using session id
-        setdata({ name: "smit", role: "volunteer", mobile: 9586064225, email: "smitdhimar@gmail.com", age: 19, city: "bardoli", badges: "diamond", points: 45 });
+        setdata({ name: "smit", role: "volunteer", mobile: 9586064225, email: "smitdhimar@gmail.com", age: 19, city: "bardoli", badges: "Diamond", points: 45 });
     }, []);
     return (
         <div className="w-full flex items-center my-4  justify-center">
