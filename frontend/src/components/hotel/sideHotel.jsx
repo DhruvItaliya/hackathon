@@ -41,6 +41,33 @@ const SideHotel = () => {
               </span>
             </Link>
           </li>
+          <li >
+            <Link
+              to='UserProfile'
+              className="group my-4 relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="size-5 opacity-75"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="black"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                />
+              </svg>
+
+              <span
+                className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible"
+              >
+                Account
+              </span>
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

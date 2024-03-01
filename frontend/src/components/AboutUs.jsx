@@ -90,9 +90,9 @@ function AboutUs() {
                 {faqData.map((faq, index) => (
                     <details
                         key={index}
-                        className="group border-s-4 border-green-500 bg-gray-50 p-6 [&_summary::-webkit-details-marker]:hidden"
+                        className="group border-s-4 border-green-500  bg-gray-50 p-6 [&_summary::-webkit-details-marker]:hidden"
                     >
-                        <summary className="flex cursor-pointer items-center justify-between gap-1.5">
+                        <summary className="flex cursor-pointer  items-center justify-between gap-1.5">
                             <h2 className="text-lg font-medium text-gray-900">{faq.question}</h2>
                             <span className="shrink-0 rounded-full bg-white p-1.5 text-gray-900 sm:p-3">
                                 <svg
@@ -109,7 +109,7 @@ function AboutUs() {
                                 </svg>
                             </span>
                         </summary>
-                        <p className="mt-4 leading-relaxed text-gray-700">{faq.answer}</p>
+                        <p className="mt-4 leading-relaxed  text-gray-700">{faq.answer}</p>
                     </details>
                 ))}
             </div>
