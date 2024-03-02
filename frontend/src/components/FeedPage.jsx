@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect,useState } from 'react'
-import FeedCard from './feedCard';
+import FeedCard from './FeedCard';
 const FeedPage = () => {
     // const [data, setdata] = useState([]);
     const data=[

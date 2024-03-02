@@ -79,8 +79,7 @@ const Login = () => {
                   </h1>
 
                   <form method='post' className="space-y-4 md:space-y-6" onSubmit={validate}>
-                    <label className='block mb-2 text-sm font-medium text-gray-900'>Your role</label>
-
+                  
                     <div className="flex">
                       <div className="flex items-center h-5">
                         <input id="helper-radio1" aria-describedby="helper-radio-text" type="radio" name="myRad" value="hotel" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300   dark:bg-gray-700 dark:border-gray-600" />
