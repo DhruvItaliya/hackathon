@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Routes ,Route} from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import Login from './components/login';
@@ -11,7 +13,20 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
   {/* <React.StrictMode> */}
+    <ToastContainer
+position="bottom-right"
+autoClose={3000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
     <Routes>
+
       <Route path="/Login" element={<Login/>}></Route>
       <Route path="/SignUp" element={<Signup/>}></Route>
       <Route path="*" element={<App/>}></Route>

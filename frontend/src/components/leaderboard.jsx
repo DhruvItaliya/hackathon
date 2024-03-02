@@ -16,16 +16,6 @@ const LeaderBoard = (props) => {
             { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
             { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
             { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
-            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
-            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
-            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
-            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
-            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
-            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
-            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
-            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
-            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
-            { name: "pqer", type: "hotel", city: "surat", badge: "platinum", point: 5 },
             { name: "abc", type: "volunteer", city: "ahmedabad", badge: "diamond", point: 456 }
         ]);
 
@@ -82,7 +72,8 @@ const LeaderBoard = (props) => {
                                 ))}
                                 {data.length <= 0 && (
                                     <tr colSpan="5">
-                                        <td><h1 className="text-center"> Oops! No data available for now.</h1>
+                                        <td>
+                                            <h1 className="text-center"> Oops! No data available for now.</h1>
                                     </td>
                                     </tr>
                                 )}

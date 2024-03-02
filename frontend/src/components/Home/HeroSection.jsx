@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function HeroSection() {
     return (
@@ -10,10 +11,14 @@ function HeroSection() {
                             <br className="hidden lg:inline-block" />Nourishing Communities
                         </h1>
                         <p className="mb-8 leading-relaxed">Our mission addresses the critical issue of food waste by connecting volunteers with hotels and restaurants to redistribute surplus food to those in need, combating hunger and fostering community support.</p>
-                        <div className="flex justify-center">
-                            <button className="inline-flex text-white bg-purple-500 border-0 py-2 px-6 focus:outline-none hover:bg-purple-600 rounded text-lg">Feed</button>
+                        <div className="flex justify-center"><Link to='/feed'>
+                            <button className="inline-flex text-white bg-purple-500 border-0 py-2 px-6 focus:outline-none hover:bg-purple-600 rounded text-lg">
+                                
+                                Feed
+                                </button></Link>
                         </div>
                     </div>
+
                     <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
                         <img className="object-cover object-center rounded" alt="hero" src="volunteer.jpg" />
                     </div>

@@ -1,10 +1,13 @@
 import React from 'react'
 import { IoAddCircleOutline } from "react-icons/io5";
 import { TbReport } from "react-icons/tb";
-
+import { Link } from 'react-router-dom';
+import {toast} from 'react-toastify'
 const SideAdmin = () => {
   const logOut=()=>{
     sessionStorage.clear();
+    toast.success("You have been logged out successfully");
+
     window.location.assign("home");
   }
   return (
@@ -15,31 +18,19 @@ const SideAdmin = () => {
       <div className="px-2">
         <ul className="space-y-1 mt-36 border-t border-gray-100 pt-4">
           <li className='my-4'>
-            <a
-              href="#"
+            <Link
+              to="/AddDriveAdmin"
               className="group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700"
             >
             <IoAddCircleOutline stroke='black' size={23}/>
               <span
-                className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible"
+                className="invisible absolute w-32 start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible"
               >
-                Add drive
+                Add drive on behalf of third party
               </span>
-            </a>
+            </Link>
           </li>
-          <li>
-            <a
-              href="#"
-              className="group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700"
-            >
-              <TbReport stroke='black'  size={23}/>
-              <span
-                className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible"
-              >
-                Admin
-              </span>
-            </a>
-          </li>
+          
         </ul>
       </div>
     </div>

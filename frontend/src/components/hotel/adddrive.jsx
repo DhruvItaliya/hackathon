@@ -1,11 +1,22 @@
 import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import {toast} from 'react-toastify'
 const AddDrive = () => {
-  const [data, setdata] = useState([]);
-  const appendField=()=>{
+  const validate=(e)=>{
+    e.preventDefault();
+    const food=document.getElementById('food').value;
+    if(food.length<3){
+      toast.error("Food name should atleast have length 3")
+      return false
+    }
+    
 
-  }  
+    //database
+    toast.success('Drive has been added successfully');
+    return true;
+
+  }
   return (
     <div className='flex-col justify-center p-4 w-full '>
       <p className="text-center h1 text-4xl font-bold mt-12">Add Drive</p>
@@ -15,7 +26,7 @@ const AddDrive = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
               Add drive details
             </h1>
-            <form method='post' className="space-y-4 md:space-y-6" action="#">
+            <form method='post' onSubmit={validate} className="space-y-4 md:space-y-6" action="#">
 
 
               <div className='md:grid md:grid-cols-2'>

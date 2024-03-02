@@ -2,10 +2,13 @@ import React from 'react'
 import { MdOutlinePostAdd } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { TbReport } from 'react-icons/tb';
-
+import {toast} from 'react-toastify';
 const SidebarVol = () => {
   const logOut=()=>{
     sessionStorage.clear();
+    //database part
+
+    toast.success("You have been logged out successfully");
     window.location.assign("home");
   }
   return (
