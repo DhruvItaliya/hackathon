@@ -116,9 +116,18 @@ export const userLogout = catchAsyncError(async (req, res, next) => {
 })
 
 export const getUser = catchAsyncError(async (req, res, next) => {
-    const user = req.user;
-    res.status(200).json({
-        success: true,
-        user,
-    });
+    // const user = req.user;
+    const id = req.params.id;
+
+    const user = await User.findById({_id:id},"name role badge point email mobile city age");
+    if(user){
+
+        res.status(200).json({
+            success: true,
+            user,
+        });
+    }
+    else {
+        res.status(404).json({msg:"Cannot find user"});
+    }
 });

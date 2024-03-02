@@ -1,25 +1,42 @@
+import axios from "axios";
 import react from "react";
 import { useEffect, useState } from "react";
-
+import ConString from "../ConnectionString";
+import Loading from "./Layout/Loading";
+import {toast} from 'react-toastify'
 const UserProfile = (props) => {
     const [data, setdata] = useState(null);
+    const [load,setLoad]=useState(false);
 
     useEffect(() => {
         //fetch data using session id
-        setdata({ name: "smit", role: "volunteer", mobile: 9586064225, email: "smitdhimar@gmail.com", age: 19, city: "bardoli", badges: "Diamond", points: 45 });
+        setLoad(true);
+        axios.get(ConString+`user/getuser/65e20a841cf2a82313b9bab6`).then(res=>{
+            // console.log(res);
+            setdata(res.data.user);
+            // debugger;
+        }).catch(err=>{
+            // console.log(err); 
+            if(!err.response.data.success)
+            {
+                toast.error("User is not authorized");
+            }
+        }).finally(()=>setLoad(false));
+
     }, []);
     return (
         <div className="w-full flex items-center my-4  justify-center">
            {data!==null&& <div className="bg-white max-w-full w-4/5  shadow overflow-hidden sm:rounded-lg">
                 <div className="px-4 py-5 sm:px-6">
                     <span className="text-3xl mx-3 leading-6 font-medium text-gray-900">
-                        {data.name.toUpperCase()}
+                        {data.name.toUpperCase()||"Name"}
                     </span>
-                    <span className="text-gray-500">-{data.role}</span>
+                    <span className="text-gray-500">-{data.role||"role"}</span>
                     {/* <p className="mt-1 max-w-2xl text-xl text-gray-500">
                     Details and informations about user.
                 </p> */}
                 </div>
+                {load && <Loading/>}
                 <div className="border-t border-gray-200">
 
                     <dl>
@@ -30,13 +47,13 @@ const UserProfile = (props) => {
                                     <div className="flex flex-col rounded-lg bg-purple-50 px-4 py-8 text-center">
                                         <dt className="order-last text-lg font-medium text-gray-500">Badge</dt>
 
-                                        <dd className="text-4xl font-extrabold text-purple-600 md:text-5xl">{data.badges}</dd>
+                                        <dd className="text-4xl font-extrabold text-purple-600 md:text-5xl">{data.badges||""}</dd>
                                     </div>
 
                                     <div className="flex flex-col rounded-lg bg-purple-50 px-4 py-8 text-center">
                                         <dt className="order-last text-lg font-medium text-gray-500">Points</dt>
 
-                                        <dd className="text-4xl font-extrabold text-purple-600 md:text-5xl">{data.points}</dd>
+                                        <dd className="text-4xl font-extrabold text-purple-600 md:text-5xl">{data.points||""}</dd>
                                     </div>
                                 </dl>
                             </div>
@@ -47,7 +64,7 @@ const UserProfile = (props) => {
                                 Email address
                             </dt>
                             <dd className="mt-1 text-xl text-gray-900 sm:mt-0 sm:col-span-2">
-                                {data.email}
+                                {data.email||"email id"}
                             </dd>
                         </div>
                         <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -55,7 +72,7 @@ const UserProfile = (props) => {
                                 Contact number
                             </dt>
                             <dd className="mt-1 text-xl text-gray-900 sm:mt-0 sm:col-span-2">
-                                {data.mobile}
+                                {data.mobile||"number"}
                             </dd>
                         </div>
                         <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -63,7 +80,7 @@ const UserProfile = (props) => {
                                 City
                             </dt>
                             <dd className="mt-1 text-xl text-gray-900 sm:mt-0 sm:col-span-2">
-                                {data.city}
+                                {data.city||"city"}
                                 </dd>
                         </div>
                         <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -71,7 +88,7 @@ const UserProfile = (props) => {
                                 Age
                             </dt>
                             <dd className="mt-1 text-xl text-gray-900 sm:mt-0 sm:col-span-2">
-                                {data.age}
+                                {data.age||"age"}
                             </dd>
                         </div>
                     </dl>
