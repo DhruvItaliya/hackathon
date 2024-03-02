@@ -9,7 +9,6 @@ const Login = () => {
     const email=document.getElementById('email').value;
     const password=document.getElementById('password').value;
     const role=document.getElementsByName('myRad');
-    console.log("entered");
     if(!role[0].checked && !role[1].checked && !role[2].checked){
       toast.error("Kindly specify your role");
       return false;
@@ -24,6 +23,7 @@ const Login = () => {
     else if(role[2].checked){
       myRole=role[2].value;
     }
+    console.log("entered");
     try {
       const { data } = await axios.post(
         `${ConString}user/login`, 
