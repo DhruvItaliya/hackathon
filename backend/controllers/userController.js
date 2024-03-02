@@ -90,11 +90,11 @@ export const userLogin = catchAsyncError(async (req, res, next) => {
     }
     const user = await User.findOne({ email }).select("+password");
     if (!user) {
-        return next(new ErrorHandler("Invalid Email and Password", 400));
+        return next(new ErrorHandler("Invalid Email or Password", 400));
     }
     const isPasswordMatched = await user.comparePassword(password);
     if (!isPasswordMatched) {
-        return next(new ErrorHandler("Invalid Email and Password", 400))
+        return next(new ErrorHandler("Invalid Email or Password", 400))
     }
     if (user.role !== role) {
         return next(

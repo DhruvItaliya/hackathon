@@ -38,7 +38,7 @@ export const drivePost  = catchAsyncError(async(req, res, next)=>{
     });
 });
 
-export const campainPost = catchAsyncError(async (req, res, next) => {
+export const campaignPost = catchAsyncError(async (req, res, next) => {
     // getting error through validationResult from req object
     const error = validationResult(req);
     const errorMsg = error.array().map(error => error.msg).join('\n');
@@ -74,6 +74,12 @@ export const campainPost = catchAsyncError(async (req, res, next) => {
 });
 
 export const myDrives_active = catchAsyncError(async (req, res, next) => {
+    const { _id, role } = req.user;
+    if (role !== 'admin') {
+        return next(
+            new ErrorHandler(`You can't post review, you are not admin`, 400)
+        );
+    }
     const drives = await Drives.find({ posted_by: req.user._id, active: true});
     res.status(200).json({
       success: true,
@@ -82,6 +88,12 @@ export const myDrives_active = catchAsyncError(async (req, res, next) => {
 });
 
 export const myDrives_inactive = catchAsyncError(async (req, res, next) => {
+    const { _id, role } = req.user;
+    if (role !== 'admin') {
+        return next(
+            new ErrorHandler(`You can't post review, you are not admin`, 400)
+        );
+    }
     const drives = await Drives.find({ posted_by: req.user._id, active: false});
     res.status(200).json({
       success: true,

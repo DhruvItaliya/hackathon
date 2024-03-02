@@ -3,6 +3,7 @@ import ErrorHandler from "../middlewares/error.js";
 import { VolunteerReview } from "../models/volunteerReviewSchema.js";
 import { validationResult } from "express-validator";
 import { Drives } from "../models/driveSchema.js";
+import { User } from "../models/userSchema.js";
 
 export const reviewPost = catchAsyncError(async (req, res, next) => {
     // getting error through validationResult from req object
@@ -16,7 +17,7 @@ export const reviewPost = catchAsyncError(async (req, res, next) => {
 
     if (role !== 'volunteer') {
         return next(
-            new ErrorHandler(`You can't post review, you are hotel`, 400)
+            new ErrorHandler(`You can't post review, you don't have an access`, 400)
         );
     }
   
@@ -57,7 +58,7 @@ export const joinDrive = catchAsyncError(async (req, res, next) => {
 
     if (role !== 'volunteer') {
         return next(
-            new ErrorHandler(`You can't access, you are hotel`, 400)
+            new ErrorHandler(`Please join as volunteer to join drive`, 400)
         );
     }
     const userId = req.user._id;
@@ -68,6 +69,10 @@ export const joinDrive = catchAsyncError(async (req, res, next) => {
     }
     if (drive.contributed_by.includes(userId)) {
         return next(new ErrorHandler("You have already joined this drive.", 400));
+    }
+    const postedByData = await User.findById(drive.posted_by);
+    if(req.user.city!==postedByData.city){
+        return next(new ErrorHandler("drive is not in your city.", 400));   
     }
     if(drive.contributed_by.length >= Math.ceil(drive.no_of_meals / 10)){
         return next(new ErrorHandler("Sorry You can't join bcz volunteers already joined it", 400));   
@@ -90,7 +95,7 @@ export const myDrives_active = catchAsyncError(async (req, res, next) => {
 
     if (role !== 'volunteer') {
         return next(
-            new ErrorHandler(`You can't access, you are hotel`, 400)
+            new ErrorHandler(`You can't see active post, you don't have an access`, 400)
         );
     }
     const volunteerCity = req.user.city;
@@ -114,7 +119,7 @@ export const myDrives_inactive = catchAsyncError(async (req, res, next) => {
 
     if (role !== 'volunteer') {
         return next(
-            new ErrorHandler(`You can't access, you are hotel`, 400)
+            new ErrorHandler(`You can't see completed post, you don't have an access`, 400)
         );
     }
     const volunteerCity = req.user.city;
