@@ -1,7 +1,9 @@
 import React from 'react'
 import {toast} from 'react-toastify'
+import axios from 'axios';
+import ConString from "../ConnectionString";
 const ContactUs = () => {
-    const validate=(e)=>{
+    const validate=async(e)=>{
         e.preventDefault();
         const email=document.getElementById("email").value;
         const query=document.getElementById("query").value;
@@ -9,11 +11,24 @@ const ContactUs = () => {
         const lname=document.getElementById("lname").value;
         const phone=document.getElementById("phone").value;
         const company=document.getElementById('company').value;
-        debugger;
 
         // database
-
-        toast.success("Your response have been received successfully");
+        try {
+            const { data } = await axios.post(
+              `${ConString}contact_us`, 
+              { email, queries:query, fname, lname, mobile:phone, company}, 
+              {
+                withCredentials: true,
+                headers:{
+                  "Content-Type": "application/json"
+                }
+              }
+            );
+            toast.success(data.message);
+          } catch (error) {
+            console.log(error);
+            toast.error(error.response.data.message);
+          }
     }
     return (
         <div>

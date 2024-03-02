@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import validator from 'validator';
 
 const contactUsSchema = new mongoose.Schema({
     email: {
@@ -34,4 +35,4 @@ const contactUsSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
-export const contactUs = new mongoose.model('contactUs', contactUsSchema);
+export const ContactUs = new mongoose.model('contactUs', contactUsSchema);

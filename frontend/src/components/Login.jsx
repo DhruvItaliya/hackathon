@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast } from 'react-toastify'
+import axios from 'axios';
+import ConString from "../ConnectionString";
 const Login = () => {
-  const validate=(e)=>{
+  const validate=async(e)=>{
     e.preventDefault();
     const email=document.getElementById('email').value;
     const password=document.getElementById('password').value;
     const role=document.getElementsByName('myRad');
-    
+    console.log("entered");
     if(!role[0].checked && !role[1].checked && !role[2].checked){
       toast.error("Kindly specify your role");
       return false;
@@ -22,8 +24,25 @@ const Login = () => {
     else if(role[2].checked){
       myRole=role[2].value;
     }
-    toast.success("You have been logged in successfully");
-    window.location.assign("/home");
+    try {
+      const { data } = await axios.post(
+        `${ConString}user/login`, 
+        { email, role:myRole, password}, 
+        {
+          withCredentials: true,
+          headers:{
+            "Content-Type": "application/json"
+          }
+        }
+      );
+      console.log(data);
+      sessionStorage.setItem('id',data.user._id);
+      toast.success("Logged in successfully");
+      window.location.assign("/home");
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+
     return true;
   }
   return (

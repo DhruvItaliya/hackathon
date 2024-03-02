@@ -27,7 +27,7 @@ import Bubbles from './components/Layout/Bubbles';
 import FeedCard from './components/FeedCard';
 import FeedPage from './components/FeedPage';
 import AddDriveAdmin from './components/Admin/AddDriveAdmin';
-let userTypeFromSession = "volunteer";
+let userTypeFromSession = "hotel";
 function App() {
   return (
     <div id="MainContent" className='bg-gray-50  flex flex-col'>
