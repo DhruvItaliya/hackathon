@@ -4,10 +4,34 @@ import Error from './NotFound/Error';
 import { Link } from 'react-router-dom';
 // import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify'
+import ConString from "../ConnectionString";
 
 import { useState } from 'react';
 const Signup = (props) => {
-  const handleSubmit = (e) => {
+  const getotp = async(e) => {
+    e.preventDefault();
+    console.log("function called");
+    const email = document.getElementById('email').value;
+    console.log(email);
+    try {
+      const { data } = await axios.post(
+        `${ConString}otp/getotp`, 
+        {email},
+        {
+          withCredentials: true,
+          headers:{
+            "Content-Type": "application/json"
+          }
+        }
+      );
+      console.log(data);
+      toast.success(data.message);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  }
+
+  const handleSubmit = async(e) => {
     e.preventDefault();
     const email = document.getElementById('email').value;
     const name = document.getElementById('name').value;
@@ -19,6 +43,7 @@ const Signup = (props) => {
     const password = document.getElementById('password').value;
     const cpassword = document.getElementById('confirm-password').value;
     const pincode = document.getElementById('pincode').value;
+    const otp = document.getElementById('otp').value;
     let myRole;
 
     if (password !== cpassword) {
@@ -36,9 +61,22 @@ const Signup = (props) => {
       myRole = role[1].value;
     }
     // database connectivity
-
-    toast.success("You have been Registered successfully");
-    window.location.assign("/login");
+    try {
+      const { data } = await axios.post(
+        `${ConString}user/register`, 
+        {role:myRole, name, mobile:phone, email, age, address, pincode, city, password, otp}, 
+        {
+          withCredentials: true,
+          headers:{
+            "Content-Type": "application/json"
+          }
+        }
+      );
+      toast.success(data.message);
+      window.location.assign("/login");
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
     return true;
   }
   return (
@@ -84,7 +122,7 @@ const Signup = (props) => {
                       <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Your email</label>
                       <div className='flex space-x-1'>
                         <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 w-[80%] text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block p-2.5" placeholder="name@company.com" required />
-                        <button className='w-[20%] bg-purple-500 text-white rounded-md hover:bg-purple-700'>Get OTP</button>
+                        <button className='w-[20%] bg-purple-500 text-white rounded-md hover:bg-purple-700' onClick={getotp}>Get OTP</button>
                       </div>
                     </div>
 
