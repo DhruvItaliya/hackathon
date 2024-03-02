@@ -9,6 +9,10 @@ import ConString from "../../ConnectionString";
 
 const AddDrive = () => {
   const [selected, setselected] = useState([]);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
   const validate = async (e) => {
     e.preventDefault();
     const no_of_meals = document.getElementById("meals").value;
@@ -18,24 +22,31 @@ const AddDrive = () => {
       return false;
     }
 
-    //database
-    try {
-      const { data } = await axios.post(
-        `${ConString}hotels/drive_post`,
-        { food_name:selected, no_of_meals, consent },
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log(data);
-      toast.success("Drive has been added successfully");
-    } catch (error) {
-      toast.error(error.response.data.message);
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append('hotel_drive_image', selectedFile);
+      formData.append('food_name', selected);
+      formData.append('no_of_meals', no_of_meals);
+      formData.append('consent', consent);
+      //database
+      try {
+        const { data } = await axios.post(
+          `${ConString}hotels/drive_post`,
+          formData,
+          {
+            withCredentials: true,
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          }
+        );
+        console.log(data);
+        toast.success("Drive has been added successfully");
+      } catch (error) {
+        toast.error(error.response.data.message);
+      }
     }
-    return true;
+      return true;
   };
 
   return (
@@ -89,8 +100,7 @@ const AddDrive = () => {
               <div className="md:grid md:grid-cols-2">
                 <label
                   htmlFor="meals"
-                  className="block mb-2 text-xl font-medium text-gray-900"
-                >
+                  className="block mb-2 text-xl font-medium text-gray-900">
                   Upload image
                 </label>
               </div>
@@ -98,9 +108,11 @@ const AddDrive = () => {
               <input
                 className="block h-10 w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none"
                 multiple
-                id="default_size"
+                id="hotel_drive_image"
+                name="hotel_drive_image"
                 required
                 type="file"
+                onChange={handleFileChange}
               />
 
               <div className="flex">
