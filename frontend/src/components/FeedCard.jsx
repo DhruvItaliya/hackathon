@@ -1,5 +1,4 @@
 import React from 'react'
-
 const FeedCard = (props) => {
   return (
     <div className="flex my-4 justify-center">
