@@ -11,6 +11,14 @@ const volunteerReviewSchema = new mongoose.Schema({
         ref:'User',
         required:true
     },
+    name:{
+        type:String,
+        required:true
+    },
+    city:{
+        type:String,
+        required:true 
+    },
     description:{
         type:String,
         required:[true,"Your Description will be very helpful to join other joinees"],

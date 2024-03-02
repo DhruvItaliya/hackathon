@@ -13,13 +13,13 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         const fileExtension = file.originalname.split('.').pop();
-        cb(null, `${"hello"}_${file.fieldname}_${Date.now()}.${fileExtension}`);
+        cb(null, `${file.fieldname}_${Date.now()}.${fileExtension}`);
     },
 });
 
 const upload = multer({ storage });
 
-router.post('/review_post',upload.single('image'), isAuthenticated, reviewPost);
+router.post('/review_post',upload.single('review_post_image'), isAuthenticated, reviewPost);
 
 // we showing active and inactive drives to user 
 router.get('/my_drives_active', isAuthenticated, myDrives_active);

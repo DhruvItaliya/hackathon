@@ -13,7 +13,7 @@ export const reviewPost = catchAsyncError(async (req, res, next) => {
         return next(new ErrorHandler(errorMsg, 400));
     }
 
-    const { _id, role } = req.user;
+    const { _id, role ,name,city } = req.user;
 
     if (role !== 'volunteer') {
         return next(
@@ -25,7 +25,7 @@ export const reviewPost = catchAsyncError(async (req, res, next) => {
         new ErrorHandler(`Image could not get`, 400)
     }
 
-    const image = `./uploads/review_post_images/${req.file.filename}`;
+    const image = `/uploads/review_post_images/${req.file.filename}`;
     const { description, improvements, for_drive } = req.body;
     const drive = await Drives.findById({ _id: for_drive });
     const userIndex = drive.contributed_by.indexOf(_id);
@@ -38,7 +38,7 @@ export const reviewPost = catchAsyncError(async (req, res, next) => {
             }
             const posted_by = _id;
             const review = await VolunteerReview.create({
-                for_drive, posted_by, description, improvements, image
+                for_drive, posted_by, description,name,city, improvements, image
             });
             drive.review_post_by[userIndex] = true;
             await drive.save();
