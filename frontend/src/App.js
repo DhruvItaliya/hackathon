@@ -36,9 +36,7 @@ function App() {
       </div>
       <Bubbles />
       <div className='flex-grow flex-row mt-16 min-h-screen  max-h-full' style={{ zIndex: 4 }}>
-
         <div className='flex w-full'>
-
           <div>
             {userTypeFromSession === "volunteer" ? <SidebarVol /> : userTypeFromSession === "hotel" ? <SideHotel /> : userTypeFromSession === "admin" ? <SideAdmin /> : null}
           </div>
@@ -60,11 +58,11 @@ function App() {
               <Route path='/UserProfile' element={<UserProfile />}></Route>
               <Route path="/LeaderBoard" element={<LeaderBoard />}></Route>
               <Route path="/ContactUs" element={<ContactUs />}></Route>
-
               <Route path='/Home' element={<Home />}></Route>
               <Route path="/GetReport" render element={<GetReport />}></Route>
               <Route path='/adddrive' element={<AddDrive />}></Route>
               <Route path="/feed" element={<FeedPage />}></Route>
+              <Route path="/Drives" element={<Feed />}></Route>
               <Route path='/aboutus' element={<AboutUs />}></Route>
               <Route path="/VolunteerReport" element={<VolunteerReport />}></Route>
               <Route path="/AddDriveAdmin" element={<AddDriveAdmin />}></Route>

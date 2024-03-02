@@ -2,21 +2,25 @@ import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {toast} from 'react-toastify'
+import { TagsInput } from "react-tag-input-component";
+// import "./styles.css";
+
 const AddDrive = () => {
+ const [selected, setselected] = useState([]);
   const validate=(e)=>{
     e.preventDefault();
-    const food=document.getElementById('food').value;
-    if(food.length<3){
-      toast.error("Food name should atleast have length 3")
+    // const food=document.getElementById('food').value;
+    if(selected.length<1){
+      toast.error("Atleast one food item should be there");
       return false
     }
-    
 
     //database
     toast.success('Drive has been added successfully');
     return true;
 
   }
+ 
   return (
     <div className='flex-col justify-center p-4 w-full '>
       <p className="text-center h1 text-4xl font-bold mt-12">Add Drive</p>
@@ -29,11 +33,17 @@ const AddDrive = () => {
             <form method='post' onSubmit={validate} className="space-y-4 md:space-y-6" action="#">
 
 
-              <div className='md:grid md:grid-cols-2'>
+              <div id="parent" className='md:grid md:grid-cols-2'>
                 <label htmlFor="food" className="block mb-2 text-xl font-medium text-gray-900">Food </label>
-                <input type="textt" name="food" id="food" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-xl rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" placeholder="Rice" required />
-                {/* <p className='text-purple-500' onClick={appendField}>Add more</p> */}
+                {/* <input type="text" name="food1" id="food1" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-xl rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" placeholder="Rice" required /> */}
+                <TagsInput classNames="text-2xl"
+        value={selected}
+        onChange={setselected}
+        name="fruits"
+        placeHolder="Enter food"
+      />
               </div>
+                {/* <p className='text-purple-500' onClick={appendFields}>Add more</p> */}
 
               <div className='md:grid md:grid-cols-2'>
                 <label htmlFor="meals" className="block mb-2 text-xl font-medium text-gray-900">Meals</label>

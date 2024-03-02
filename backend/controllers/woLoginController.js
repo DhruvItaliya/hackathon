@@ -12,9 +12,9 @@ export const getFeed = catchAsyncError(async (req, res, next) => {
         review
     });
 });
-
+// {user: id},'_id title description target cnt lastUpdated'
 export const getUsers = catchAsyncError(async (req, res, next) => {
-    const user = await User.find({}).sort({ ndrive : -1 });
+    const user = await User.find({role:"volunteer"},"name city badge ndrive").sort({ ndrive : -1 });
     res.status(200).json({
         success: true,
         message: "Users fetched successfully!",
