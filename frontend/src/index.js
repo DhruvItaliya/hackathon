@@ -7,8 +7,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Routes ,Route} from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
-import Login from './components/login';
-import Signup from './components/signup';
+import Login from './components/Login';
+import Signup from './components/SignUp';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>

@@ -3,38 +3,37 @@ import axios from 'axios';
 import Error from './NotFound/Error';
 import { Link } from 'react-router-dom';
 // import { ToastContainer } from 'react-toastify';
-import { toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 
 import { useState } from 'react';
 const Signup = (props) => {
-  const handleSubmit=(e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const email=document.getElementById('email').value;
-    const name=document.getElementById('name').value;
-    const role=document.getElementsByName('myRad');
-    const address=document.getElementById('address').value;
-    const phone=document.getElementById('phone').value;
-    const age=document.getElementById("age").value;
-    const city=document.getElementById('city').value;
-    const password=document.getElementById('password').value;
-    const cpassword=document.getElementById('confirm-password').value;
-    const pincode=document.getElementById('pincode').value;
+    const email = document.getElementById('email').value;
+    const name = document.getElementById('name').value;
+    const role = document.getElementsByName('myRad');
+    const address = document.getElementById('address').value;
+    const phone = document.getElementById('phone').value;
+    const age = document.getElementById("age").value;
+    const city = document.getElementById('city').value;
+    const password = document.getElementById('password').value;
+    const cpassword = document.getElementById('confirm-password').value;
+    const pincode = document.getElementById('pincode').value;
     let myRole;
-    
-    if(password!==cpassword){
+
+    if (password !== cpassword) {
       toast.error("Confirm password does not match");
       return false;
     }
-    if(!role[0].checked && !role[1].checked)
-    {
+    if (!role[0].checked && !role[1].checked) {
       toast.error("Kindly specify your role");
       return false;
     }
-    if(role[0].checked){
-      myRole=role[0].value;
+    if (role[0].checked) {
+      myRole = role[0].value;
     }
     else {
-      myRole=role[1].value;
+      myRole = role[1].value;
     }
     // database connectivity
 
@@ -50,7 +49,7 @@ const Signup = (props) => {
           <section className='w-full'>
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto  lg:py-0 ">
               <Link to="/" className="flex items-center mb-6 text-3xl font-semibold text-purple-600 underline">
-              <img src="mealMission.svg" className="h-9 w-auto" alt="mealMission" />
+                <img src="mealMission.svg" className="h-9 w-auto" alt="mealMission" />
               </Link>
               <div className="w-full bg-white rounded-lg shadow drop-shadow-2xl md:mt-0 sm:max-w-md xl:p-0 border-b-4 border-l-4 border-l-purple-600 border-b-purple-600">
                 <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -63,7 +62,7 @@ const Signup = (props) => {
                         <input id="helper-radio1" aria-describedby="helper-radio-text" type="radio" name="myRad" value="hotel" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300  dark:bg-gray-700 dark:border-gray-600" />
                       </div>
                       <div className="ms-2 text-sm">
-                        <label  htmlFor="helper-radio1" className="font-medium text-gray-900 ">Hotel / Restaurant </label>
+                        <label htmlFor="helper-radio1" className="font-medium text-gray-900 ">Hotel / Restaurant </label>
                         <p id="helper-radio-text" className="text-xs font-normal text-gray-500">
 
                           Donate food wastage help the poor communities
@@ -75,7 +74,7 @@ const Signup = (props) => {
                         <input id="helper-radio2" aria-describedby="helper-radio-text" type="radio" name="myRad" value="volunteer" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300  dark:bg-gray-700 dark:border-gray-600" />
                       </div>
                       <div className="ms-2 text-sm">
-                        <label  htmlFor="helper-radio2" className="font-medium text-gray-900 ">Volunteer</label>
+                        <label htmlFor="helper-radio2" className="font-medium text-gray-900 ">Volunteer</label>
                         <p id="helper-radio-text" className="text-xs font-normal text-gray-500">
                           Help distributing food to needy people
                         </p>
@@ -84,8 +83,8 @@ const Signup = (props) => {
                     <div>
                       <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Your email</label>
                       <div className='flex space-x-1'>
-                      <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 w-[80%] text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block p-2.5" placeholder="name@company.com" required />
-                      <button className='w-[20%] bg-purple-500 text-white rounded-md hover:bg-purple-700'>Get OTP</button>
+                        <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 w-[80%] text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block p-2.5" placeholder="name@company.com" required />
+                        <button className='w-[20%] bg-purple-500 text-white rounded-md hover:bg-purple-700'>Get OTP</button>
                       </div>
                     </div>
 
@@ -111,10 +110,10 @@ const Signup = (props) => {
                     </div>
                     <div>
                       <label htmlFor="pincode" className="block mb-2 text-sm font-medium text-gray-900">Pincode</label>
-                      <input type="number" name="pincode" id="pincode" pattern='[0-9]{6}' className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" placeholder="e.g.400001" required />
+                      <input type="number" name="pincode" id="pincode" pattern='[1-9]{1}[0-9]{5}' className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" placeholder="e.g.400001" required />
                     </div>
 
-                      {/* <label className='block mb-2 text-sm font-medium text-gray-900'>Your role</label> */}
+                    {/* <label className='block mb-2 text-sm font-medium text-gray-900'>Your role</label> */}
                     <div>
                       <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Password</label>
                       <input type="password" pattern='(?=.*[0-9])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}' name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" required />
@@ -123,6 +122,11 @@ const Signup = (props) => {
                     <div>
                       <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900">Confirm password</label>
                       <input type="password" name="confirm-password" id="confirm-password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" required />
+                    </div>
+
+                    <div>
+                      <label htmlFor="otp" className="block mb-2 text-sm font-medium text-gray-900">OTP</label>
+                      <input type="number" pattern="[0-9]{6}"  name="otp" id="otp" placeholder="••••••" min={0} max={999999} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" required />
                     </div>
 
                     <button type="submit" className="w-full text-white bg-purple-500 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Create an account</button>
