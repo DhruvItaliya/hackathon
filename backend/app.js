@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import path from 'path';
 import dbConnection from "./database/dbConnection.js";
 import { errorMiddleware } from "./middlewares/error.js";
 import userRoutes from "./routes/userRoutes.js"
@@ -13,6 +14,7 @@ import otpRouter from "./routes/otpRouter.js"
 const app = express();
 dotenv.config();
 
+app.use('/uploads', express.static('uploads'));
 app.use(cors({
     origin: [process.env.FRONTEND_URL],
     methods: ['GET', 'POST', 'DELETE', 'PUT'],

@@ -4,10 +4,34 @@ import Error from './NotFound/Error';
 import { Link } from 'react-router-dom';
 // import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify'
+import ConString from "../ConnectionString";
 
 import { useState } from 'react';
 const Signup = (props) => {
-  const handleSubmit = (e) => {
+  const getotp = async (e) => {
+    e.preventDefault();
+    console.log("function called");
+    const email = document.getElementById('email').value;
+    console.log(email);
+    try {
+      const { data } = await axios.post(
+        `${ConString}otp/getotp`,
+        { email },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      );
+      console.log(data);
+      toast.success(data.message);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const email = document.getElementById('email').value;
     const name = document.getElementById('name').value;
@@ -19,6 +43,7 @@ const Signup = (props) => {
     const password = document.getElementById('password').value;
     const cpassword = document.getElementById('confirm-password').value;
     const pincode = document.getElementById('pincode').value;
+    const otp = document.getElementById('otp').value;
     let myRole;
 
     if (password !== cpassword) {
@@ -36,9 +61,22 @@ const Signup = (props) => {
       myRole = role[1].value;
     }
     // database connectivity
-
-    toast.success("You have been Registered successfully");
-    window.location.assign("/login");
+    try {
+      const { data } = await axios.post(
+        `${ConString}user/register`,
+        { role: myRole, name, mobile: phone, email, age, address, pincode, city, password, otp },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      );
+      toast.success(data.message);
+      window.location.assign("/login");
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
     return true;
   }
   return (
@@ -84,7 +122,7 @@ const Signup = (props) => {
                       <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Your email</label>
                       <div className='flex space-x-1'>
                         <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 w-[80%] text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block p-2.5" placeholder="name@company.com" required />
-                        <button className='w-[20%] bg-purple-500 text-white rounded-md hover:bg-purple-700'>Get OTP</button>
+                        <button className='w-[20%] bg-purple-500 text-white rounded-md hover:bg-purple-700' onClick={getotp}>Get OTP</button>
                       </div>
                     </div>
 
@@ -96,21 +134,26 @@ const Signup = (props) => {
                       <label htmlFor="address" className="block mb-2 text-sm font-medium text-gray-900">Address</label>
                       <input type="text" name="address" id="address" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" placeholder="name" required />
                     </div>
-                    <div>
-                      <label htmlFor="number" className="block mb-2 text-sm font-medium text-gray-900">Contact number</label>
-                      <input type="number" pattern='[0-9]{10}' name="phone" id="phone" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" placeholder="7887878418" required />
+                    <div className='flex gap-2 flex-row'>
+                      <div className='w-1/2 '>
+                        <label htmlFor="number" className="block mb-2 text-sm font-medium  text-gray-900">Contact number</label>
+                        <input type="number" pattern='[0-9]{10}' name="phone" id="phone" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" placeholder="7887878418" required />
+                      </div>
+                      <div className='w-1/2'>
+                        <label htmlFor="age" className="block mb-2 text-sm font-medium text-gray-900">Your age</label>
+                        <input type="number" name="age" id="age" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" placeholder="e.g. 45" min={15} max={110} required />
+                      </div>
                     </div>
-                    <div>
-                      <label htmlFor="age" className="block mb-2 text-sm font-medium text-gray-900">Your age</label>
-                      <input type="number" name="age" id="age" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" placeholder="e.g. 45" min={15} max={110} required />
-                    </div>
-                    <div>
-                      <label htmlFor="city" className="block mb-2 text-sm font-medium text-gray-900">Your city</label>
-                      <input type="text" name="city" id="city" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" placeholder="e.g. Mumbai" required />
-                    </div>
-                    <div>
-                      <label htmlFor="pincode" className="block mb-2 text-sm font-medium text-gray-900">Pincode</label>
-                      <input type="number" name="pincode" id="pincode" pattern='[1-9]{1}[0-9]{5}' className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" placeholder="e.g.400001" required />
+                    <div className='flex gap-2 flex-row'>
+
+                      <div className='w-1/2'>
+                        <label htmlFor="city" className="block mb-2 text-sm font-medium text-gray-900">Your city</label>
+                        <input type="text" name="city" id="city" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" placeholder="e.g. Mumbai" required />
+                      </div>
+                      <div className='w-1/2'>
+                        <label htmlFor="pincode" className="block mb-2 text-sm font-medium text-gray-900">Pincode</label>
+                        <input type="number" name="pincode" id="pincode" pattern='[1-9]{1}[0-9]{5}' className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" placeholder="e.g.400001" required />
+                      </div>
                     </div>
 
                     {/* <label className='block mb-2 text-sm font-medium text-gray-900'>Your role</label> */}
@@ -126,7 +169,7 @@ const Signup = (props) => {
 
                     <div>
                       <label htmlFor="otp" className="block mb-2 text-sm font-medium text-gray-900">OTP</label>
-                      <input type="number" pattern="[0-9]{6}"  name="otp" id="otp" placeholder="••••••" min={0} max={999999} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" required />
+                      <input type="number" pattern="[0-9]{6}" name="otp" id="otp" placeholder="••••••" min={0} max={999999} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" required />
                     </div>
 
                     <button type="submit" className="w-full text-white bg-purple-500 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Create an account</button>
@@ -140,7 +183,8 @@ const Signup = (props) => {
           </section>
         </div>
         <div className='blur-xl invisible flex md:visible lg:visible flex-row-reverse items-center justify-center md:blur-0 lg:blur-none'>
-        <img src="images/signUpImg.png" className="" alt="signupImg" />
+          <img src="images/signUpImg.png" className="" alt="signupImg" />
+          <div />
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@ router.post('/login', [
     body('password', "Incorrect password!").isStrongPassword()
 ], userLogin)
 
-router.get('/getuser', isAuthenticated, getUser);
+router.get('/getuser/:id', isAuthenticated , getUser);
 
 router.get('/logout', isAuthenticated, userLogout);
 

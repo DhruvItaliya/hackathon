@@ -17,11 +17,12 @@ export const drivePost  = catchAsyncError(async(req, res, next)=>{
           new ErrorHandler(`You can't post drive, you are not admin`, 400)
         );
     }
+
     if(!req.files){
         new ErrorHandler(`Image could not get`, 400)
     }
 
-    const image = `./uploads/admin_drive_images/${req.file.filename}`;
+    const image = `/uploads/admin_drive_images/${req.file.filename}`;
 
     const { food_name, no_of_meals, consent }= req.body;
     if( !food_name || !no_of_meals || !consent || !image){
@@ -57,7 +58,7 @@ export const campaignPost = catchAsyncError(async (req, res, next) => {
         new ErrorHandler(`Image could not get`, 400)
     }
 
-    const image = `./uploads/admin_campaign_images/${req.file.filename}`;
+    const image = `/uploads/admin_campaign_images/${req.file.filename}`;
 
     const { title, description, location, date  } = req.body;
     if (!title || !description || !image || !location || !date) {

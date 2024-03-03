@@ -1,52 +1,34 @@
 import React from 'react'
-import { useEffect,useState } from 'react'
+import ConString from '../ConnectionString';
+import { useEffect, useState } from 'react'
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import FeedCard from './FeedCard';
 const FeedPage = () => {
-    // const [data, setdata] = useState([]);
-    const data=[
-      {name:"Smit Dhimar",
-      photo:"https://img.freepik.com/free-photo/abstract-design-with-colorful-patterns-nature-leaf-generated-by-ai_188544-15573.jpg?w=1380&t=st=1709237528~exp=1709238128~hmac=96a28e2fef7f1ffbdae67d3cd752069f0f74b2c5d4bc24610e7e6355882b9b58",
-      cityName:"Anand",
-      description:"this image has been taken from something called freepik.com and i am writing short description for the same , thank you for reading.",
-      time: "9:03AM 23 Feb"},
-      {name:"Smit Dhimar",
-      photo:"https://img.freepik.com/free-photo/abstract-design-with-colorful-patterns-nature-leaf-generated-by-ai_188544-15573.jpg?w=1380&t=st=1709237528~exp=1709238128~hmac=96a28e2fef7f1ffbdae67d3cd752069f0f74b2c5d4bc24610e7e6355882b9b58",
-      cityName:"Anand",
-      description:"this image has been taken from something called freepik.com and i am writing short description for the same , thank you for reading.",
-      time: "9:03AM 23 Feb"},
-      {name:"Smit Dhimar",
-      photo:"https://img.freepik.com/free-photo/abstract-design-with-colorful-patterns-nature-leaf-generated-by-ai_188544-15573.jpg?w=1380&t=st=1709237528~exp=1709238128~hmac=96a28e2fef7f1ffbdae67d3cd752069f0f74b2c5d4bc24610e7e6355882b9b58",
-      cityName:"Anand",
-      description:"this image has been taken from something called freepik.com and i am writing short description for the same , thank you for reading.",
-      time: "9:03AM 23 Feb"},
-      {name:"Smit Dhimar",
-      photo:"https://img.freepik.com/free-photo/abstract-design-with-colorful-patterns-nature-leaf-generated-by-ai_188544-15573.jpg?w=1380&t=st=1709237528~exp=1709238128~hmac=96a28e2fef7f1ffbdae67d3cd752069f0f74b2c5d4bc24610e7e6355882b9b58",
-      cityName:"Anand",
-      description:"this image has been taken from something called freepik.com and i am writing short description for the same , thank you for reading.",
-      time: "9:03AM 23 Feb"},
-      {name:"Smit Dhimar",
-      photo:"https://img.freepik.com/free-photo/abstract-design-with-colorful-patterns-nature-leaf-generated-by-ai_188544-15573.jpg?w=1380&t=st=1709237528~exp=1709238128~hmac=96a28e2fef7f1ffbdae67d3cd752069f0f74b2c5d4bc24610e7e6355882b9b58",
-      cityName:"Anand",
-      description:"this image has been taken from something called freepik.com and i am writing short description for the same , thank you for reading.",
-      time: "9:03AM 23 Feb"},
-      {name:"Smit Dhimar",
-      photo:"https://img.freepik.com/free-photo/abstract-design-with-colorful-patterns-nature-leaf-generated-by-ai_188544-15573.jpg?w=1380&t=st=1709237528~exp=1709238128~hmac=96a28e2fef7f1ffbdae67d3cd752069f0f74b2c5d4bc24610e7e6355882b9b58",
-      cityName:"Anand",
-      description:"this image has been taken from something called freepik.com and i am writing short description for the same , thank you for reading.",
-      time: "9:03AM 23 Feb"},
-      {name:"Smit Dhimar",
-      photo:"https://img.freepik.com/free-photo/abstract-design-with-colorful-patterns-nature-leaf-generated-by-ai_188544-15573.jpg?w=1380&t=st=1709237528~exp=1709238128~hmac=96a28e2fef7f1ffbdae67d3cd752069f0f74b2c5d4bc24610e7e6355882b9b58",
-      cityName:"Anand",
-      description:"this image has been taken from something called freepik.com and i am writing short description for the same , thank you for reading.",
-      time: "9:03AM 23 Feb"}
-    ]
-    useEffect(()=>{
-      
-    },[]);
+  const [data, setdata] = useState([]);
+  useEffect( () => {
+    const getResponse = async()=>{
+    try {
+       const response  = await axios.get(
+        `${ConString}get_feed`,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      );
+      setdata(response.data.review);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  }
+  getResponse();
+  }, []);
   return (
     <div className='grid p-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 transition'>
-      {data.map((ele)=>(
-        <FeedCard  name={ele.name} photo={ele.photo} cityName={ele.cityName} description={ele.description} time={ele.time}/>)
+      {data.map((ele) => (
+        <FeedCard key={ele._id} name={ele.name} photo={`http://localhost:5000${ele.image}`} cityName={ele.city} description={ele.description} time={new Date(ele.updatedAt).toLocaleString("en-US", { timeZone: "Asia/Kolkata", hour12: false })} />)
       )}
     </div>
   )
