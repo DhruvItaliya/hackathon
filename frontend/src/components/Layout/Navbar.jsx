@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   // const myPath=window.location.pathname;
   const loggedIn=sessionStorage.getItem('id');
-  alert(loggedIn);
   return (
     <div>
       <header style={{ zIndex: 5 }} className="bg-white drop-shadow-xl fixed p-1 w-full top-0 h-16">
