@@ -2,13 +2,22 @@ import React from 'react'
 import { MdOutlinePostAdd } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { TbReport } from 'react-icons/tb';
+import axios from "axios";
 import {toast} from 'react-toastify';
+import ConString from "../../ConnectionString";
 const SidebarVol = () => {
-  const logOut=()=>{
+  const logOut=async()=>{
     sessionStorage.clear();
     //database part
-
-    toast.success("You have been logged out successfully");
+    try {
+      const response = await axios.get(`${ConString}user/logout`, 
+      {
+        withCredentials: true
+      });
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
     window.location.assign("home");
   }
   return (

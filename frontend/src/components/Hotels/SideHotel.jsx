@@ -2,12 +2,23 @@ import React from 'react'
 import { IoAddCircleOutline } from "react-icons/io5";
 import { TbReport } from "react-icons/tb";
 import { Link } from 'react-router-dom';
-import {toast} from 'react-toastify'
+import {toast} from 'react-toastify';
+import axios from "axios";
+import ConString from "../../ConnectionString";
 const SideHotel = () => {
-  const logOut=()=>{
+  const logOut=async()=>{
     sessionStorage.clear();
-    toast.success("You have been logged out successfully");
-    window.location.assign('home');
+    //database part
+    try {
+      const response = await axios.get(`${ConString}user/logout`, 
+      {
+        withCredentials: true
+      });
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+    window.location.assign("home");
   }
   return (
     <div className='h-full min-h-screen'>
