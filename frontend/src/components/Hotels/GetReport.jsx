@@ -4,6 +4,8 @@ import jsPDF from 'jspdf';
 import Chart from 'chart.js/auto';
 import html2pdf from 'html2pdf.js';
 import {toast} from 'react-toastify';
+import ConString from "../../ConnectionString";
+import axios from "axios";
 const GetReport = () => {
     const [drives, setdrives] = useState(0);
     const [packets, setpackets] = useState(0);
@@ -34,17 +36,53 @@ const GetReport = () => {
         return `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}`;
     };
 
+    const [drivedata, setDriveData] = useState([]);
     useEffect(() => {
-        mydata = [
-            { date: 1677672524000, packets: 23, drives: 3 },
-            { date: 1677672541000, packets: 46, drives: 4 },
-            { date: 1677672573000, packets: 46, drives: 4 },
-            { date: 1111112524000, packets: 46, drives: 4 },
-            { date: 1111111512000, packets: 46, drives: 6 },
-            { date: 1677672523000, packets: 46, drives: 7 },
-            { date: 1677672522000, packets: 46, drives: 8 }
-        ];
+        const getdata = async () => {
+            try {
+                const { data } = await axios.get(
+                  `${ConString}hotels/my_drives_active`, 
+                  {
+                    withCredentials: true,
+                    headers:{
+                      "Content-Type": "application/json"
+                    }
+                  }
+                );             
+                let totalMeals = 0;
+                setDriveData(data.drives)
+                data.drives.forEach(drive => {
+                    totalMeals += drive.no_of_meals;
+                });
+                setpackets(totalMeals);
+              } catch (error) {
+                toast.error(error.response.data.message);
+              }
+        }
+        getdata();
+    }, []);
 
+    useEffect(() => {
+        const groupedByDate = drivedata.reduce((acc, current) => {
+            const date = current.createdAt.split('T')[0]; // Extract the date part
+            if (!acc[date]) {
+              acc[date] = [];
+            }
+            acc[date].push(current);
+            return acc;
+        }, {});
+          
+        const mydata = Object.entries(groupedByDate).map(([date, entries]) => {
+            const packets = entries.reduce((sum, entry) => sum + entry.no_of_meals, 0);
+                return {
+                    date,
+                    packets,
+                    drives: entries.length,
+                };
+            }   
+        );
+        const totalDrives = mydata.reduce((sum, item) => sum + item.drives, 0);
+        setdrives(totalDrives);
         mydata.forEach((item) => (item.date = getDay(item.date)));
 
         if (myChartRef.current) {
@@ -71,12 +109,7 @@ const GetReport = () => {
 
             },
         });
-        mydata.forEach((ele) => {
-            setpackets((packets) => packets + ele.packets);
-        });
-        mydata.forEach((ele) => setdrives((drives) => drives + ele.drives));
-
-    }, []);
+    }, [drivedata]);
     return sessionStorage.getItem('id')?(
         <div className="w-full h-full flex justify-center">
             <div className="m-10 p-4 w-4/5">
@@ -96,7 +129,7 @@ const GetReport = () => {
                                 </div>
 
                                 <div className="flex flex-col rounded-lg bg-purple-50 px-4 py-8 text-center">
-                                    <dt className="order-last text-lg font-medium text-gray-500">Packets</dt>
+                                    <dt className="order-last text-lg font-medium text-gray-500">No. Of Meals</dt>
 
                                     <dd className="text-4xl font-extrabold text-purple-600 md:text-5xl">{packets}</dd>
                                 </div>
