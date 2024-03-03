@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   // const myPath=window.location.pathname;
+  const loggedIn=sessionStorage.getItem('id');
   return (
     <div>
       <header style={{ zIndex: 5 }} className="bg-white drop-shadow-xl fixed p-1 w-full top-0 h-16">
@@ -44,21 +45,21 @@ const Navbar = () => {
 
             <div className="flex items-center gap-4">
               <div className="sm:flex sm:gap-4">
-                <Link
+                {!loggedIn && <Link
                   className="rounded-md bg-purple-500 px-5 py-2.5 text-sm font-medium text-white shadow"
                   to="/Login"
                 >
                   Login
-                </Link>
+                </Link>}
 
-                <div className="hidden sm:flex">
+                {!loggedIn && <div className="hidden sm:flex">
                   <Link
                     className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-purple-500"
                     to="/SignUp"
                   >
                     Register
                   </Link>
-                </div>
+                </div>}
               </div>
 
               <div className="block md:hidden">

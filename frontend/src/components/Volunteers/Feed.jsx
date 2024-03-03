@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import {toast} from 'react-toastify';
 function Feed({ cityName, hotelName, noOfMeals, status }) {
     const [activeDrives, setActiveDrives] = useState([]);
     const [completedDrives, setCompletedDrives] = useState([]);
@@ -16,7 +16,7 @@ function Feed({ cityName, hotelName, noOfMeals, status }) {
                 const elapsedMinutes = Math.floor(timeDifference / (1000 * 60));
                 const timeElapsed = elapsedMinutes > 0 ? `${elapsedMinutes} minutes ago` : 'Just now';
                 newActiveDrives.push(
-                    <a key={i} href="#" className="block rounded-lg p-4 shadow-sm shadow-indigo-100 mb-6">
+                    <a key={i} href="#" className="block border-l-4 border-l-purple-500  rounded-lg p-4 shadow-2xl shadow-indigo-100 mb-6">
                         <img
                             alt=""
                             src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80"
@@ -42,7 +42,7 @@ function Feed({ cityName, hotelName, noOfMeals, status }) {
                 const completionDate = new Date(); 
                 const formattedCompletionDate = completionDate.toLocaleDateString('en-US');
                 newCompletedDrives.push(
-                    <a key={i} href="#" className="block rounded-lg p-4 shadow-sm shadow-indigo-100 mb-6">
+                    <a key={i} href="#" className="block border-l-4 border-l-purple-500 rounded-lg p-4 shadow-2xl shadow-indigo-100 mb-6">
                         <img
                             alt=""
                             src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80"
@@ -64,8 +64,7 @@ function Feed({ cityName, hotelName, noOfMeals, status }) {
         setCompletedDrives(generateCompletedDrives());
     }, [cityName, hotelName, noOfMeals]);
 
-    return (
-        <div className="container mx-auto px-4">
+    return sessionStorage.getItem('id')?(<div className="container mx-auto px-4">
             <h1 className="text-3xl font-bold text-black my-8">Active Drives</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {activeDrives}
@@ -75,8 +74,7 @@ function Feed({ cityName, hotelName, noOfMeals, status }) {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {completedDrives}
             </div>
-        </div>
-    );
+        </div>):toast.error("You are not logged in");
 }
 
 export default Feed;

@@ -46,8 +46,7 @@ const AddDriveAdmin = () => {
     }
       return true;
   };
-
-  return (
+  return sessionStorage.getItem('id')?(
     <div className="flex-col justify-center p-4 w-full ">
       <p className="text-center h1 text-4xl font-bold mt-12">Add Drive</p>
       <div className="w-full my-5 flex justify-center">
@@ -78,7 +77,6 @@ const AddDriveAdmin = () => {
                 />
               </div>
               {/* <p className='text-purple-500' onClick={appendFields}>Add more</p> */}
-
               <div className="md:grid md:grid-cols-2">
                 <label
                   htmlFor="meals"
@@ -161,8 +159,8 @@ const AddDriveAdmin = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
-};
+  </div>
+  ):toast.error("You are not logged in");
+}
 
 export default AddDriveAdmin

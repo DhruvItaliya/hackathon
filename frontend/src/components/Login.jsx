@@ -37,6 +37,7 @@ const Login = () => {
       );
       console.log(data);
       sessionStorage.setItem('id',data.user._id);
+      sessionStorage.setItem('type',data.user.role);
       toast.success("Logged in successfully");
       window.location.assign("/home");
     } catch (error) {

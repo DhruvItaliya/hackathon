@@ -11,12 +11,12 @@ const UserProfile = (props) => {
     useEffect(() => {
         //fetch data using session id
         setLoad(true);
-        axios.get(ConString+`user/getuser/65e20a841cf2a82313b9bab6`).then(res=>{
-            // console.log(res);
+        axios.get(ConString+`user/getuser/${sessionStorage.getItem('id')}`).then(res=>{
+            console.log(res);
             setdata(res.data.user);
             // debugger;
         }).catch(err=>{
-            // console.log(err); 
+            console.log(err); 
             if(!err.response.data.success)
             {
                 toast.error("User is not authorized");
@@ -24,7 +24,7 @@ const UserProfile = (props) => {
         }).finally(()=>setLoad(false));
 
     }, []);
-    return (
+    return sessionStorage.getItem('id')?(
         <div className="w-full flex items-center my-4  justify-center">
            {data!==null&& <div className="bg-white max-w-full w-4/5  shadow overflow-hidden sm:rounded-lg">
                 <div className="px-4 py-5 sm:px-6">
@@ -97,6 +97,6 @@ const UserProfile = (props) => {
             {data===null &&  <span className="text-3xl m-3 leading-6 font-medium text-gray-900">
                         Oops No data found
                     </span>}
-        </div>);
+        </div>):toast.error("You are not logged in");
 };
 export default UserProfile;
