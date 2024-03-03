@@ -7,7 +7,6 @@ const SideHotel = () => {
   const logOut=()=>{
     sessionStorage.clear();
     toast.success("You have been logged out successfully");
-
     window.location.assign('home');
   }
   return (
