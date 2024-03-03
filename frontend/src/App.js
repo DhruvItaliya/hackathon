@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import AOS from 'aos' ;
+import "aos/dist/aos.css"
+import React, { useEffect, useState } from 'react';
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
 import Home from './components/Home/Home';
@@ -30,6 +32,13 @@ import AddDriveAdmin from './components/Admin/AddDriveAdmin';
 import PostReview from './components/Volunteers/PostReview';
 let userTypeFromSession = sessionStorage.getItem('type');
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration:1000,
+      easing: 'ease-out-cubic'
+    });
+  },[]);
+
   return (
     <div id="MainContent" className='bg-gray-50  flex flex-col'>
       <div>
