@@ -3,7 +3,7 @@ import { useState } from 'react';
 import jsPDF from 'jspdf';
 import Chart from 'chart.js/auto';
 import html2pdf from 'html2pdf.js';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 const GetReport = () => {
     const [drives, setdrives] = useState(0);
     const [packets, setpackets] = useState(0);

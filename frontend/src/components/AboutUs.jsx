@@ -72,8 +72,8 @@ const faqData = [
 function AboutUs() {
     return (
 
-        <div className="container mx-auto px-4">
-            <div className="my-8 text-center mr-64 ml-64 py-1 shadow-xl backdrop-blur-sm  bg-[#ede6f3] rounded-md">
+        <div data-aos="zoom-in" className="container mx-auto px-4">
+            <div  className="my-8 text-center mr-64 ml-64 py-1 shadow-xl backdrop-blur-sm  bg-[#ede6f3] rounded-md">
                 <div className="my-8">
                     <h2 className="text-3xl font-bold mb-1">Our Vision</h2>
                     <p className='p-5 mb-1'>{visionStatement}</p>
@@ -86,7 +86,7 @@ function AboutUs() {
 
 
             <h1 className="text-3xl font-bold text-black my-8 text-center">Frequently Asked Questions</h1>
-            <div className="space-y-4 overflow-hidden">
+            <div data-aos="zoom-in" className="space-y-4 overflow-hidden">
                 {faqData.map((faq, index) => (
                     <details
                         key={index}

@@ -40,23 +40,23 @@ const Footer = () => {
                 className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:mt-0 lg:justify-end lg:gap-12"
               >
                 <li>
-                  <a className="text-gray-700 transition font-semibold hover:text-purple-500/75" href="#"> Feed </a>
+                  <Link to="/Feed" className="text-gray-700 font-semibold transition hover:text-purple-500/75 " > Feed </Link>
                 </li>
 
                 <li>
-                  <a className="text-gray-700 transition font-semibold hover:text-purple-500/75" href="#"> Leaderboard </a>
+                  <Link to="/LeaderBoard" className="text-gray-700 transition font-semibold hover:text-purple-500/75" href="#"> Leaderboard </Link>
                 </li>
 
                 <li>
-                  <a className="text-gray-700 transition font-semibold hover:text-purple-500/75" href="#"> About us </a>
+                  <Link to="/AboutUs" className="text-gray-700 transition font-semibold hover:text-purple-500/75" href="#"> About us </Link>
                 </li>
 
                 <li>
-                  <a className="text-gray-700 transition font-semibold hover:text-purple-500/75" href="#"> Contact us </a>
+                  <Link to="/ContactUs" className="text-gray-700 transition font-semibold hover:text-purple-500/75" href="#"> Contact us </Link>
                 </li>
 
                 <li>
-                  <a className="text-gray-700 transition font-semibold hover:text-purple-500/75" href="#"> Join us </a>
+                  <Link to="/SignUp" className="text-gray-700 transition font-semibold hover:text-purple-500/75" href="#"> Join us </Link>
                 </li>
               </ul>
             </div>

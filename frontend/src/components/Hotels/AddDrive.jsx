@@ -1,16 +1,16 @@
 import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 const AddDrive = () => {
-  const validate=(e)=>{
+  const validate = (e) => {
     e.preventDefault();
-    const food=document.getElementById('food').value;
-    if(food.length<3){
+    const food = document.getElementById('food').value;
+    if (food.length < 3) {
       toast.error("Food name should atleast have length 3")
       return false
     }
-    
+
 
     //database
     toast.success('Drive has been added successfully');
@@ -39,11 +39,11 @@ const AddDrive = () => {
                 <label htmlFor="meals" className="block mb-2 text-xl font-medium text-gray-900">Meals</label>
                 <input type="number" name="meals" id="meals" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-xl rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5" placeholder="10" required />
               </div>
-               <div className='md:grid md:grid-cols-2'>
+              <div className='md:grid md:grid-cols-2'>
                 <label htmlFor="meals" className="block mb-2 text-xl font-medium text-gray-900">Upload image</label>
-                </div>
-             
-<input className="block h-10 w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none" multiple id="default_size" required type="file"/>
+              </div>
+
+              <input className="block h-10 w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none" multiple id="default_size" required type="file" />
 
 
               <div className="flex">
