@@ -113,8 +113,7 @@ const VolunteerReport = () => {
 
     }, []);
     console.log(drives);
-    return (
-        <div className="w-full h-full flex justify-center">
+    return sessionStorage.getItem('id')?(<div className="w-full h-full flex justify-center">
             <div className="m-10 p-4 w-4/5">
                 <div id="pdfData">
                     <h3 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900 my-4 text-center">
@@ -144,7 +143,7 @@ const VolunteerReport = () => {
                 </button>
             </div>
         </div>
-    );
+    ):toast.error("You are not logged in");
 };
 
 
