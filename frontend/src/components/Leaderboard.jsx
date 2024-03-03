@@ -12,6 +12,7 @@ const LeaderBoard = (props) => {
         setLoad(true);
         axios.get(ConString+"get_users").then(res => {
             setData(res.data.user);
+            console.log(res);
             
         }).catch(err => console.log(err)).finally(()=>setLoad(false));
 
@@ -63,13 +64,6 @@ const LeaderBoard = (props) => {
                                         </td>
                                     </tr>
                                 ))}
-                                {/* {data.length <=0 && (
-                                    <tr colSpan="5">
-                                        <td>
-                                            <h1 className="text-center"> Oops! No data available for now.</h1>
-                                        </td>
-                                    </tr>
-                                )} */}
                             </tbody>
                         </table>
                     </div>
