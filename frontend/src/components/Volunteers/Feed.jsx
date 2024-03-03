@@ -3,7 +3,15 @@ import {toast} from 'react-toastify';
 function Feed({ cityName, hotelName, noOfMeals, status }) {
     const [activeDrives, setActiveDrives] = useState([]);
     const [completedDrives, setCompletedDrives] = useState([]);
-
+    const consent=()=>{
+        const choice=window.confirm("Are you sure you want to join the drive?");
+        if(choice)
+        {
+        }
+        else{
+            
+        }
+    }
     useEffect(() => {
         const currentTime = new Date();
         
@@ -27,6 +35,7 @@ function Feed({ cityName, hotelName, noOfMeals, status }) {
                             <p className="font-medium">Hotel: {hotelName}</p>
                             <p className="font-medium">No. of meals: {noOfMeals}</p>
                             <p className="font-medium">Posted: {timeElapsed}</p>
+                            <button className='inline-flex text-white bg-purple-500 border-0 px-2 py-1 focus:outline-none hover:bg-purple-600 rounded my-1 text-md' onClick={consent}>Join drive</button>
                         </div>
                     </a>
                 );
@@ -65,7 +74,9 @@ function Feed({ cityName, hotelName, noOfMeals, status }) {
     }, [cityName, hotelName, noOfMeals]);
 
     return sessionStorage.getItem('id')?(<div className="container mx-auto px-4">
+     
             <h1 className="text-3xl font-bold text-black my-8">Active Drives</h1>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {activeDrives}
             </div>
