@@ -9,9 +9,19 @@ module.exports = {
     extend: {
       animation:{
         blob: "blob 7s infinite"
-        ,circle:"circle 11s infinite"
+        ,circle:"circle 11s infinite",
+        rcircle:"circleReverse 12s infinite"
       },
       keyframes:{
+        circleReverse: {
+          "0%": {
+            transform: "rotate(0deg) translateX(80px) translateY(0) rotate(-360deg)",
+          },
+          "100%": {
+            transform: "rotate(360deg) translateX(0) translateY(80px) rotate(0deg)",
+          },
+        }
+,        
         circle:{
           "0%":{
             transform: "rotate(0deg) translateX(70px) rotate(360deg)"

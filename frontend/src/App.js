@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
 import Home from './components/Home/Home';
-import Feed from './components/Feed';
+import Feed from './components/Volunteers/Feed';
 import Error from './components/NotFound/Error';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -27,7 +27,7 @@ import Bubbles from './components/Layout/Bubbles';
 import FeedCard from './components/FeedCard';
 import FeedPage from './components/FeedPage';
 import AddDriveAdmin from './components/Admin/AddDriveAdmin';
-let userTypeFromSession = "hotel";
+let userTypeFromSession = sessionStorage.getItem('type');
 function App() {
   return (
     <div id="MainContent" className='bg-gray-50  flex flex-col'>

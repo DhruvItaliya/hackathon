@@ -28,7 +28,7 @@ const AddDriveAdmin = () => {
     toast.success("The drive has been added successfully");
     return true;
   }
-  return (
+  return sessionStorage.getItem('id')?(
     <div className='flex-col justify-center p-4 w-full '>
     <p className="text-center h1 text-4xl font-bold mt-12">Add Drive</p>
     <div className="w-full my-5 flex justify-center">
@@ -82,7 +82,7 @@ const AddDriveAdmin = () => {
         </div>
       </div></div>
   </div>
-  )
+  ):toast.error("You are not logged in");
 }
 
 export default AddDriveAdmin

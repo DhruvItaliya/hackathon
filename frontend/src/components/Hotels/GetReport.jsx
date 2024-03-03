@@ -77,7 +77,7 @@ const GetReport = () => {
         mydata.forEach((ele) => setdrives((drives) => drives + ele.drives));
 
     }, []);
-    return (
+    return sessionStorage.getItem('id')?(
         <div className="w-full h-full flex justify-center">
             <div className="m-10 p-4 w-4/5">
                 <div id="pdfData">
@@ -113,7 +113,7 @@ const GetReport = () => {
                 </button>
             </div>
         </div>
-    );
+    ):toast.error("You are not logged in");
 };
 
 export default GetReport;
