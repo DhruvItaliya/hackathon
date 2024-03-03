@@ -94,7 +94,7 @@ const GetReport = () => {
                 datasets: [
                     {
                         type: 'line',
-                        label: 'Packets',
+                        label: 'No. of Meals',
                         data: mydata.map((ele) => ele.packets),
                     },
                     {
