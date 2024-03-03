@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post('/review_post',upload.single('review_post_image'), isAuthenticated, reviewPost);
+router.post('/review_post:drive_id',upload.single('review_post_image'), isAuthenticated, reviewPost);
 
 // we showing active and inactive drives to user 
 router.get('/my_drives_active', isAuthenticated, myDrives_active);
