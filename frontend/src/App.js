@@ -8,7 +8,6 @@ import Feed from './components/Volunteers/Feed';
 import Error from './components/NotFound/Error';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import Popup from './components/Layout/PopUp';
 import Loading from './components/Layout/Loading';
 import ContactUs from './components/ContactUs';
@@ -79,9 +78,7 @@ function App() {
               <Route path="/AddDriveAdmin" element={<AddDriveAdmin />}></Route>
               <Route path="/" exact render element={<Home />}></Route>
               <Route path="*" element={<PageNotFound />}></Route>
-
-
-            </Routes>
+</Routes>
 
           </div>
         </div>
