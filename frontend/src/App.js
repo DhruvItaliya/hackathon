@@ -29,8 +29,7 @@ import Bubbles from './components/Layout/Bubbles';
 import FeedCard from './components/FeedCard';
 import FeedPage from './components/FeedPage';
 import AddDriveAdmin from './components/Admin/AddDriveAdmin';
-
-
+import PostReview from './components/Volunteers/PostReview';
 let userTypeFromSession = sessionStorage.getItem('type');
 function App() {
   useEffect(() => {
@@ -72,6 +71,7 @@ function App() {
               <Route path='/Home' element={<Home />}></Route>
               <Route path="/GetReport" render element={<GetReport />}></Route>
               <Route path='/adddrive' element={<AddDrive />}></Route>
+              <Route path='/PostReview' element={<PostReview />}></Route>
               <Route path="/feed" element={<FeedPage />}></Route>
               <Route path="/Drives" element={<Feed />}></Route>
               <Route path='/aboutus' element={<AboutUs />}></Route>

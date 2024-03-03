@@ -13,32 +13,33 @@ export const reviewPost = catchAsyncError(async (req, res, next) => {
         return next(new ErrorHandler(errorMsg, 400));
     }
 
-    const { _id, role ,name,city } = req.user;
+    const { _id, role, name, city } = req.user;
 
     if (role !== 'volunteer') {
         return next(
             new ErrorHandler(`You can't post review, you don't have an access`, 400)
         );
     }
-  
-    if(!req.files){
+
+    if (!req.files) {
         new ErrorHandler(`Image could not get`, 400)
     }
 
     const image = `/uploads/review_post_images/${req.file.filename}`;
-    const { description, improvements, for_drive } = req.body;
+    const { description, improvements } = req.body;
+    const for_drive = req.params.drive_id;
     const drive = await Drives.findById({ _id: for_drive });
     const userIndex = drive.contributed_by.indexOf(_id);
     if (userIndex === -1) {
         return next(new ErrorHandler("You can't post review for this drive, bcz you didn't participated in it"));
-    }else {
-        if(drive.review_post_by[userIndex] === false){
+    } else {
+        if (drive.review_post_by[userIndex] === false) {
             if (!description || !improvements || !image) {
                 return next(new ErrorHandler("Please fill all required fields!"));
             }
             const posted_by = _id;
             const review = await VolunteerReview.create({
-                for_drive, posted_by, description,name,city, improvements, image
+                for_drive, posted_by, description, name, city, improvements, image
             });
             drive.review_post_by[userIndex] = true;
             await drive.save();
@@ -47,7 +48,7 @@ export const reviewPost = catchAsyncError(async (req, res, next) => {
                 message: "Review added",
                 review
             });
-        }else{
+        } else {
             return next(new ErrorHandler("You can't post review for this drive, bcz you uploaded already"));
         }
     }
@@ -71,18 +72,19 @@ export const joinDrive = catchAsyncError(async (req, res, next) => {
         return next(new ErrorHandler("You have already joined this drive.", 400));
     }
     const postedByData = await User.findById(drive.posted_by);
-    if(req.user.city!==postedByData.city){
-        return next(new ErrorHandler("drive is not in your city.", 400));   
+    if (req.user.city !== postedByData.city) {
+        return next(new ErrorHandler("drive is not in your city.", 400));
     }
-    if(drive.contributed_by.length >= Math.ceil(drive.no_of_meals / 10)){
-        return next(new ErrorHandler("Sorry You can't join bcz volunteers already joined it", 400));   
+    if (drive.contributed_by.length >= Math.ceil(drive.no_of_meals / 10)) {
+        await Drives.findByIdAndUpdate(id, { active: false }, { new: true });
+        return next(new ErrorHandler("Sorry You can't join bcz volunteers already joined it", 400));
     }
 
     // Proceed to add the user to the contributed_by array
     drive.contributed_by.push(userId);
     drive.review_post_by.push(false);
     await drive.save();
-    const updatedVolunteer = await User.findByIdAndUpdate(_id, { $inc: { ndrive: 1 } }, { new: true });
+    await User.findByIdAndUpdate(_id, { $inc: { ndrive: 1 } }, { new: true });
     res.status(200).json({
         success: true,
         message: "You have successfully joined this drive!",
@@ -107,7 +109,7 @@ export const myDrives_active = catchAsyncError(async (req, res, next) => {
     }));
 
     const finalDrives = filteredDrives.filter(drive => drive !== null);
-    
+
     res.status(200).json({
         success: true,
         finalDrives,
@@ -131,7 +133,7 @@ export const myDrives_inactive = catchAsyncError(async (req, res, next) => {
     }));
 
     const finalDrives = filteredDrives.filter(drive => drive !== null);
-    
+
     res.status(200).json({
         success: true,
         finalDrives,
@@ -145,7 +147,7 @@ export const getReviewPost = catchAsyncError(async (req, res, next) => {
             new ErrorHandler(`You can't get campaign details, you are not Volunteer`, 400)
         );
     }
-    const volunteerReview = await VolunteerReview.find({posted_by : _id});
+    const volunteerReview = await VolunteerReview.find({ posted_by: _id });
     res.status(200).json({
         success: true,
         message: "Fetched successfully",
