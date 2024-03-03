@@ -14,7 +14,6 @@ export const userRegister = catchAsyncError(async (req, res, next) => {
         return next(new ErrorHandler(errorMsg, 400));
     }
     const { role, name, mobile, email, age, address, pincode, city, password, otp } = req.body;
-    console.log(req.body);
     if (!role || !name || !mobile || !email || !password || !city || !otp) {
         return next(new ErrorHandler("Please fill full registration form"));
     }

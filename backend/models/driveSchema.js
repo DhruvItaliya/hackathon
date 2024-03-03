@@ -35,6 +35,22 @@ const driveSchema = new mongoose.Schema({
     active: {
         type: Boolean,
         default: true
+    },
+    address: {
+        type: String,
+        required: true
+    },
+    city:{
+        type: String,
+        required: true
+    },
+    pincode: {        
+        type: String,
+        required: true
+    },
+    p_name:{                
+        type: String,
+        required: true
     }
 }, { timestamps: true });
 

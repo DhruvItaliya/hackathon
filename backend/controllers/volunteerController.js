@@ -84,7 +84,7 @@ export const joinDrive = catchAsyncError(async (req, res, next) => {
     drive.contributed_by.push(userId);
     drive.review_post_by.push(false);
     await drive.save();
-    await User.findByIdAndUpdate(_id, { $inc: { ndrive: 1 } }, { new: true });
+    await User.findByIdAndUpdate(userId, { $inc: { ndrive: 1 } }, { new: true });
     res.status(200).json({
         success: true,
         message: "You have successfully joined this drive!",
@@ -109,7 +109,6 @@ export const myDrives_active = catchAsyncError(async (req, res, next) => {
     }));
 
     const finalDrives = filteredDrives.filter(drive => drive !== null);
-
     res.status(200).json({
         success: true,
         finalDrives,
