@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import AOS from 'aos' ;
+import "aos/dist/aos.css"
+import React, { useEffect, useState } from 'react';
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
 import Home from './components/Home/Home';
@@ -27,8 +29,16 @@ import Bubbles from './components/Layout/Bubbles';
 import FeedCard from './components/FeedCard';
 import FeedPage from './components/FeedPage';
 import AddDriveAdmin from './components/Admin/AddDriveAdmin';
+import PostReview from './components/Volunteers/PostReview';
 let userTypeFromSession = sessionStorage.getItem('type');
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration:1000,
+      easing: 'ease-out-cubic'
+    });
+  },[]);
+
   return (
     <div id="MainContent" className='bg-gray-50  flex flex-col'>
       <div>
@@ -61,6 +71,7 @@ function App() {
               <Route path='/Home' element={<Home />}></Route>
               <Route path="/GetReport" render element={<GetReport />}></Route>
               <Route path='/adddrive' element={<AddDrive />}></Route>
+              <Route path='/PostReview' element={<PostReview />}></Route>
               <Route path="/feed" element={<FeedPage />}></Route>
               <Route path="/Drives" element={<Feed />}></Route>
               <Route path='/aboutus' element={<AboutUs />}></Route>
