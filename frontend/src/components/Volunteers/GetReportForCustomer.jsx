@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React, { useEffect, useRef } from 'react';
+import ConString from "./../../ConnectionString";
 import { useState } from 'react';
 import jsPDF from 'jspdf';
 import Chart from 'chart.js/auto';
@@ -75,16 +77,12 @@ const VolunteerReport = () => {
     };
 
     useEffect(() => {
-        mydata = [
-            { date: 2222222524000, drives: 3 },
-            { date: 1677672541000, drives: 4 },
-            { date: 1677672573000, drives: 4 },
-            { date: 1111112524000, drives: 4 },
-            { date: 1111111512000, drives: 6 },
-            { date: 1677672523000, drives: 7 },
-            { date: 1677672522000, drives: 8 }
-        ];
 
+        axios.get(ConString+`user/getStats/${sessionStorage.getItem('id')}`).then(res=>{
+            console.log(res);
+        }).catch(err=>{
+            console.log(err);
+        })
         mydata.forEach((item) => (item.date = getMonth(item.date)));
 
         if (myChartRef.current) {

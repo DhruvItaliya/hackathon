@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import { userLogin, userRegister, userLogout, getUser } from '../controllers/userController.js';
+import { userLogin, userRegister, userLogout, getUser,getStats } from '../controllers/userController.js';
 import { isAuthenticated } from '../middlewares/auth.js';
 
 //Destructuring body and validationResult
@@ -21,7 +21,7 @@ router.post('/login', [
 ], userLogin)
 
 router.get('/getuser/:id', isAuthenticated , getUser);
-
+router.get('/getStats/:id',getStats);
 router.get('/logout', isAuthenticated, userLogout);
 
 // It is necessary to export module
