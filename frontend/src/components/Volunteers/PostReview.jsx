@@ -2,14 +2,13 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { TagsInput } from "react-tag-input-component";
-import { FileUpload } from 'primereact/fileupload';
-
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import ConString from "../../ConnectionString";
 // import "./styles.css";
 
 const PostReview = () => {
+  const { eleId } = useParams();
   const [selectedFile, setSelectedFile] = useState(null);
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
@@ -20,13 +19,13 @@ const PostReview = () => {
     const improvements = document.getElementById("improvements").value;
     if (selectedFile) {
       const formData = new FormData();
-      formData.append('hotel_drive_image', selectedFile);
+      formData.append('review_post_image', selectedFile);
       formData.append('description', description);
       formData.append('improvements', improvements);
       //database
       try {
         const { data } = await axios.post(
-          `${ConString}volunteer/review_post`,
+          `${ConString}volunteer/review_post/${eleId}`,
           formData,
           {
             withCredentials: true,
@@ -37,6 +36,7 @@ const PostReview = () => {
         );
         console.log(data);
         toast.success("Your memory is live now :)");
+        window.location.assign("/Drives");
       } catch (error) {
         toast.error(error.response.data.message);
       }

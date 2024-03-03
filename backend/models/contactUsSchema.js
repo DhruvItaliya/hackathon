@@ -21,7 +21,6 @@ const contactUsSchema = new mongoose.Schema({
     },
     mobile: {
         type: String,
-        unique: true,
         required: [true, "Please Provide Mobile no."],
         validate: {
             validator: function (v) {

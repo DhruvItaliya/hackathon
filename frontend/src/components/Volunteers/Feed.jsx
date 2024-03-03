@@ -1,55 +1,77 @@
 import React, { useState, useEffect } from 'react';
+import ConString from "../../ConnectionString";
+import axios from "axios";
 import {toast} from 'react-toastify';
+import { Link } from 'react-router-dom';
 function Feed() {
     const [activeDrives, setActiveDrives] = useState([]);
     const [completedDrives, setCompletedDrives] = useState([]);
-    const consent=()=>{
+    const consent=async(e)=>{
         const choice=window.confirm("Are you sure you want to join the drive?");
         if(choice)
         {
-        }
-        else{
-            
+            await axios.get(
+                `${ConString}volunteer/join_drive/${e}`,
+                {
+                    withCredentials: true,
+                    headers:{
+                        "Content-Type": "application/json"
+                    }
+                }).then(res=>{
+                toast.success(res.data.message)
+            }).catch(err=>{
+                console.log(err); 
+                if(!err.response.data.success){
+                    toast.error(err.response.data.message);
+                }
+            });
         }
     }
     useEffect(() => {
-        const currentTime = new Date();
-        
-        const getElapsedTime=(time)=>{
-            const timeDifference = currentTime - postTime;
-            const elapsedMinutes = Math.floor(timeDifference / (1000 * 60));
-            return  elapsedMinutes > 0 ? `${elapsedMinutes} minutes ago` : 'Just now';
+        const fetchData = async() => {
+            try {
+                const activeResponse = await axios.get(
+                  `${ConString}volunteer/my_drives_active`, 
+                  {
+                        withCredentials: true,
+                        headers: {
+                        "Content-Type": "application/json"
+                        }
+                  }
+                );
+                const completedResponse = await axios.get(
+                    `${ConString}volunteer/my_drives_inactive`, 
+                    {
+                        withCredentials: true,
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    }
+                );
+                setActiveDrives(activeResponse.data.finalDrives);
+                setCompletedDrives(completedResponse.data.finalDrives)
+            }catch (error) {
+                console.error('Error fetching data:', error);
+                toast.error(error.response.data.message);
+            }
         }
-        const postTime=new Date(); //will be replaced the time received from db
-        setActiveDrives([
-            {cityName:'anand',hotelName:'abc',noOfMeals:12,timeElapsed:getElapsedTime(postTime)},
-            {cityName:'surat',hotelName:'marriot',noOfMeals:12,timeElapsed:getElapsedTime(postTime)},
-            {cityName:'anand',hotelName:'abc',noOfMeals:12,timeElapsed:getElapsedTime(postTime)},
-            {cityName:'anand',hotelName:'abc',noOfMeals:12,timeElapsed:getElapsedTime(postTime)},
-        ]);
-        setCompletedDrives([
-            {cityName:"auranga bad",hotelName:"something",noOfMeals:22,completed:postTime.toLocaleDateString('en-US'),posted:true},
-            {cityName:"delhi",hotelName:"something",noOfMeals:22,completed:postTime.toLocaleDateString('en-US'),posted:false},
-            {cityName:"alsdf",hotelName:"asfdd",noOfMeals:22,completed:postTime.toLocaleDateString('en-US'),posted:true},
-            {cityName:" ahmedabad",hotelName:"aads",noOfMeals:22,completed:postTime.toLocaleDateString('en-US'),posted:false},
-        ])
-
+        fetchData();
     },[]);
-     // Function to generate card elements for active drives
+
      const generateActiveDrives = (ele) => {
        return (
-                <a  href="#" className="block border-l-4 border-l-purple-500  rounded-lg p-4 shadow-2xl shadow-indigo-100 mb-6">
+                <a  key={ele._id} href="#" className="block border-l-4 border-l-purple-500  rounded-lg p-4 shadow-2xl shadow-indigo-100 mb-6">
                     <img
-                        alt=""
-                        src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80"
+                        alt={ele.food_name}
+                        src={`http://localhost:5000${ele.image}`}
                         className="h-40 w-full rounded-md object-cover mb-2"
                     />
                     <div>
-                        <p className="font-medium">City: {ele.cityName}</p>
-                        <p className="font-medium">Hotel: {ele.hotelName}</p>
-                        <p className="font-medium">No. of meals: {ele.noOfMeals}</p>
-                        <p className="font-medium">Posted: {ele.timeElapsed}</p>
-                        <button className='inline-flex text-white bg-purple-500 border-0 px-2 py-1 focus:outline-none hover:bg-purple-600 rounded my-1 text-md' onClick={consent}>Join drive</button>
+                        <p className="font-medium">Posted By: {ele.p_name}</p>
+                        <p className="font-medium">No. of meals: {ele.no_of_meals}</p>
+                        <p className="font-medium">Address: {ele.address}, {ele.city}, {ele.pincode}</p>
+                        <p className="font-medium">Posted At: {new Date(ele.createdAt).toLocaleString("en-US", { timeZone: "Asia/Kolkata", hour12: false })}</p>
+                        <button className='inline-flex text-white bg-purple-500 border-0 px-2 py-1 focus:outline-none hover:bg-purple-600 rounded my-1 text-md' onClick={()=>consent(ele._id)}>Join drive</button>
                     </div>
                 </a>
           )
@@ -58,19 +80,20 @@ function Feed() {
     // Function to generate card elements for completed drives
     const generateCompletedDrives = (ele) => {
        
-          return (      <a  href="#" className="block border-l-4 border-l-purple-500 rounded-lg p-4 shadow-2xl shadow-indigo-100 mb-6">
+          return (      <a  key={ele._id}   className="block border-l-4 border-l-purple-500 rounded-lg p-4 shadow-2xl shadow-indigo-100 mb-6">
                     <img
                         alt=""
-                        src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80"
+                        src={`http://localhost:5000${ele.image}`}
                         className="h-40 w-full rounded-md object-cover mb-2"
                    />
-                    <div>
-                        <p className="font-medium">City: {ele.cityName}</p>
-                        <p className="font-medium">Hotel: {ele.hotelName}</p>
-                        <p className="font-medium">No. of meals: {ele.noOfMeals}</p>
-                        <p className="font-medium">Completed: {ele.completed}</p>
-                        {!ele.posted && <button className='inline-flex text-white bg-purple-500 border-0 px-2 py-1 focus:outline-none hover:bg-purple-600 rounded my-1 text-md' onClick={consent}>Post drive</button>}
+                   <div>
+                        <p className="font-medium">Posted By: {ele.p_name}</p>
+                        <p className="font-medium">No. of meals: {ele.no_of_meals}</p>
+                        <p className="font-medium">Address: {ele.address}, {ele.city}, {ele.pincode}</p>
+                        <p className="font-medium">Posted At: {new Date(ele.createdAt).toLocaleString("en-US", { timeZone: "Asia/Kolkata", hour12: false })}</p>
+                        <Link to={`/PostReview/${ele._id}`} >{!ele.posted && <button className='inline-flex text-white bg-purple-500 border-0 px-2 py-1 focus:outline-none hover:bg-purple-600 rounded my-1 text-md'>Share Memory</button>}</Link>
                     </div>
+                    
                 </a>
           )
     };
