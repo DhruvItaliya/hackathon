@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+ import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import jsPDF from 'jspdf';
 import Chart from 'chart.js/auto';
@@ -56,7 +56,7 @@ const GetReport = () => {
                 data.drives.forEach(drive => {
                     totalMeals += drive.no_of_meals;
                 });
-                setpackets(totalMeals);
+                setpackets(totalMeals); 
               } catch (error) {
                 toast.error(error.response.data.message);
               }

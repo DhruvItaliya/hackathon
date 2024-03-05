@@ -11,7 +11,7 @@ export const drivePost  = catchAsyncError(async(req, res, next)=>{
     if (!error.isEmpty()) {
         return next(new ErrorHandler( errorMsg ,400));
     }
-    const {_id,role} = req.user;
+    const {_id,role,address,pincode,city,name} = req.user;
     if (role !== 'admin') {
         return next(
           new ErrorHandler(`You can't post drive, you are not admin`, 400)
@@ -30,7 +30,7 @@ export const drivePost  = catchAsyncError(async(req, res, next)=>{
     }
     const posted_by = _id;
     const drive = await Drives.create({
-        food_name, no_of_meals, posted_by, consent, image
+        food_name, no_of_meals, posted_by, consent,image,address,pincode,city,p_name:name
     });
     res.status(200).json({
         success: true,
