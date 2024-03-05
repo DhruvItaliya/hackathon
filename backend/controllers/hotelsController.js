@@ -22,7 +22,7 @@ export const drivePost  = catchAsyncError(async(req, res, next)=>{
         new ErrorHandler(`Image could not get`, 400)
     }
 
-    const image = `/uploads/drive_images/${req.file.filename}`;
+    const image = `/uploads/hotel_drive_images/${req.file.filename}`;
     const { food_name, no_of_meals, consent }= req.body;
     if( !food_name || !no_of_meals || !consent || !image ){
         return next(new ErrorHandler("Please fill all required fields!"));
