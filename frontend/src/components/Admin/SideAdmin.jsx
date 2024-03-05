@@ -1,11 +1,12 @@
 import React from 'react'
+import { LiaBlogSolid } from "react-icons/lia";
 import { IoAddCircleOutline } from "react-icons/io5";
 import { TbReport } from "react-icons/tb";
 import { Link } from 'react-router-dom';
 import {toast} from 'react-toastify';
 import axios from "axios";
-
 import ConString from "../../ConnectionString";
+
 const SideAdmin = () => {
   const logOut=async()=>{
     sessionStorage.clear();
@@ -42,6 +43,22 @@ const SideAdmin = () => {
             </Link>
           </li>
           
+          <li className='my-4'>
+            <Link
+              to="/AddBlog"
+              className="group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+            >
+            <LiaBlogSolid stroke='black' size={23}/>
+              <span
+                className="invisible absolute w-32 start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible"
+              >
+                Add Blogs
+              </span>
+            </Link>
+          </li>
+
+
+
         </ul>
       </div>
     </div>

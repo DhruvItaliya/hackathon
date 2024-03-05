@@ -3,6 +3,7 @@ import {VolunteerReview} from "../models/volunteerReviewSchema.js"
 import {User} from "../models/userSchema.js";
 import {ContactUs} from "../models/contactUsSchema.js";
 import nodemailer from 'nodemailer';
+import { blogPost } from "../models/blogPostSchema.js";
 
 export const getFeed = catchAsyncError(async (req, res, next) => {
     const review = await VolunteerReview.find({}).sort({ timestamps: -1 });
@@ -104,4 +105,13 @@ export const postContact = catchAsyncError(async(req, res, next) => {
         message: "We will Contact you shortly",
         contactUs
     });
+});
+
+export const get_blog_post = catchAsyncError(async (req, res, next) => {
+  const allBlogs = await blogPost.find({}).sort({ timestamps: -1 });;
+  res.status(200).json({
+      success: true,
+      message: "Fetched successfully",
+      allBlogs
+  });
 });
