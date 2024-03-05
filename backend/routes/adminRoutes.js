@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import { drivePost, campaignPost, getCampaign, myDrives_active, myDrives_inactive } from '../controllers/adminController.js';
+import { drivePost, campaignPost, getCampaign, myDrives_active, myDrives_inactive , blog_post} from '../controllers/adminController.js';
 import { isAuthenticated } from '../middlewares/auth.js';
 import multer from 'multer';
 
@@ -41,5 +41,5 @@ router.post('/campaign_post', upload2.single('admin_campaign_image'), isAuthenti
 router.get('/get_campaign', isAuthenticated, getCampaign);
 router.get('/my_drives_active', isAuthenticated, myDrives_active);
 router.get('/my_drives_inactive', isAuthenticated, myDrives_inactive);
-
+router.post('/blog_post', isAuthenticated, blog_post);
 export default router;

@@ -1,18 +1,12 @@
 import React from 'react';
 import axios from 'axios';
-import Error from './NotFound/Error';
 import { Link } from 'react-router-dom';
-// import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify'
 import ConString from "../ConnectionString";
-
-import { useState } from 'react';
 const Signup = (props) => {
   const getotp = async (e) => {
     e.preventDefault();
-    console.log("function called");
     const email = document.getElementById('email').value;
-    console.log(email);
     try {
       const { data } = await axios.post(
         `${ConString}otp/getotp`,
@@ -24,7 +18,6 @@ const Signup = (props) => {
           }
         }
       );
-      console.log(data);
       toast.success(data.message);
     } catch (error) {
       toast.error(error.response.data.message);

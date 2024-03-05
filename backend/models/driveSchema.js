@@ -25,7 +25,7 @@ const driveSchema = new mongoose.Schema({
     },
     contributed_by: {
         type: [mongoose.Schema.Types.ObjectId],
-        ref: 'User', // Reference to the User model
+        ref: 'user', // Reference to the User model
         default: []
     },
     review_post_by: {

@@ -29,6 +29,10 @@ import FeedCard from './components/FeedCard';
 import FeedPage from './components/FeedPage';
 import AddDriveAdmin from './components/Admin/AddDriveAdmin';
 import PostReview from './components/Volunteers/PostReview';
+import  ScholarshipProvider from './context/main';
+import Blog from './components/Blog' ;
+import AddBlog from './components/Admin/AddBlog';
+import Index from './pages/community/index'
 let userTypeFromSession = sessionStorage.getItem('type');
 function App() {
   useEffect(() => {
@@ -62,7 +66,7 @@ function App() {
               pauseOnHover
               theme="light"
             />
-
+            <ScholarshipProvider>
             <Routes>
               <Route path='/UserProfile' element={<UserProfile />}></Route>
               <Route path="/LeaderBoard" element={<LeaderBoard />}></Route>
@@ -78,8 +82,11 @@ function App() {
               <Route path="/AddDriveAdmin" element={<AddDriveAdmin />}></Route>
               <Route path="/" exact render element={<Home />}></Route>
               <Route path="*" element={<PageNotFound />}></Route>
-</Routes>
-
+              <Route path="/AddBlog" element={<AddBlog />}></Route>
+              <Route path="/Blog" element={<Blog />}></Route>
+              <Route path="/community" element={<Index/>}></Route>
+            </Routes>
+            </ScholarshipProvider>
           </div>
         </div>
       </div>
