@@ -31,13 +31,18 @@ const Navbar = () => {
                   </li>
 
                   <li>
+                    <Link to="/Blog" className="text-gray-800 font-bold text-lg transition hover:text-purple-500/75 " > Blog </Link>
+                  </li>
+
+                  <li>
                     <Link to="/AboutUs" className="text-gray-800 font-bold text-lg  transition hover:text-purple-500/75 " > About us </Link>
                   </li>
 
                   <li>
                     <Link to="/ContactUs" className="text-gray-800 font-bold text-lg transition hover:text-purple-500/75 " > Contact us </Link>
                   </li>
-
+                  {loggedIn && (< Link to="/Community" className="text-gray-800 font-bold text-lg transition hover:text-purple-500/75" > Community </Link>)
+                  }
 
                 </ul>
               </nav>
