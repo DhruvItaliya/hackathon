@@ -37,7 +37,6 @@ export default function Index() {
         const result = res.data;
         handlePost(result);
         setGolbalPost(result);
-        console.log("Global data:", globalPost);
       } catch (error) {
         console.log(error);
       }
@@ -48,7 +47,6 @@ export default function Index() {
   // logic to add question
   const handleAddQuestion = async (e) => {
     const arr = valQ.split(", ");
-    console.log(sessionStorage.getItem('id'));
     const packet = {
       id: sessionStorage.getItem('id'),
       question: val,
@@ -64,7 +62,6 @@ export default function Index() {
           },
         }
       );
-      console.log(res.data);
       setVal("");
       setValQ("");
       setUpdate(!update);
