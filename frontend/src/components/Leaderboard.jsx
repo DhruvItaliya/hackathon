@@ -11,9 +11,7 @@ const LeaderBoard = (props) => {
     useEffect(() => {
         setLoad(true);
         axios.get(ConString+"get_users").then(res => {
-            setData(res.data.user);
-            console.log(res);
-            
+            setData(res.data.user);            
         }).catch(err => console.log(err)).finally(()=>setLoad(false));
 
     }, []);

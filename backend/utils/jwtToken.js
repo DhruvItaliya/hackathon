@@ -1,6 +1,5 @@
 export const sendToken = (user, statusCode, res, message) => {
     const token = user.getJWTToken();
-    console.log("token from jwttoken.js "+token);
     const options = {
         expiresIn: process.env.COOKIE_EXPIRE,
         httpOnly: true,

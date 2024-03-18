@@ -18,7 +18,6 @@ const FeedPage = () => {
           }
         }
       );
-      console.log(response.data.review);
       setdata(response.data.review);
     } catch (error) {
       toast.error(error.response.data.message);

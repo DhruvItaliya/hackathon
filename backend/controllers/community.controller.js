@@ -7,16 +7,13 @@ export const addQuestion = async (req, res, next) => {
     const { id , question, tags } = req.body;
     const result1 = await User.findById(id);
     if (!result1) return next(new ErrorHandler("User Not found", 404));
-    console.log(result1);
     const user = result1._id;
-    console.log("add question");
     const post = new Community({
       user,
       question,
       tags,
     });
     await post.save();
-    console.log(post);
     res.status(200).json(post);
   } catch (error) {
     console.log(error);
@@ -51,12 +48,10 @@ export const addAnswer = async (req, res, next) => {
 
 export const getAllPost = async (req, res, next) => {
   try {
-    console.log("getall ans");
     const result = await Community.find().sort({timestapms: - 1})
       .populate('user') // Populate the user field in the main object
       .populate('answers.user'); // Populate the user field within the answers array
     if (!result || result.length === 0) {
-      console.log("No data");
       return next(new ErrorHandler("No data found", 404));
     }
 
